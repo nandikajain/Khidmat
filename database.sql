@@ -87,7 +87,7 @@ DROP TABLE IF EXISTS `DeliveryWorker`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `DeliveryWorker` (
-  `employeeId` varchar(8) NOT NULL,
+  `employeeID` varchar(8) NOT NULL,
   `fName` varchar(20) NOT NULL,
   `lName` varchar(20) NOT NULL,
   `phone` char(10) NOT NULL,
@@ -103,10 +103,10 @@ CREATE TABLE `DeliveryWorker` (
   `tips` int NOT NULL DEFAULT '0',
   `supervisorID` varchar(8) DEFAULT NULL,
   `fuelAmt` int DEFAULT '2000',
-  PRIMARY KEY (`employeeId`),
+  PRIMARY KEY (`employeeID`),
   UNIQUE KEY `phone` (`phone`),
   KEY `supervisorID` (`supervisorID`),
-  CONSTRAINT `DeliveryWorker_ibfk_1` FOREIGN KEY (`supervisorID`) REFERENCES `Management` (`employeeId`)
+  CONSTRAINT `DeliveryWorker_ibfk_1` FOREIGN KEY (`supervisorID`) REFERENCES `Management` (`employeeID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -139,9 +139,9 @@ CREATE TABLE `Donation` (
   KEY `donorID` (`donorID`),
   KEY `receiverID` (`receiverID`),
   KEY `deliveryWorkerID` (`deliveryWorkerID`),
-  CONSTRAINT `Donation_ibfk_1` FOREIGN KEY (`donorID`) REFERENCES `Donor` (`donorId`),
-  CONSTRAINT `Donation_ibfk_2` FOREIGN KEY (`receiverID`) REFERENCES `Receiver` (`receiverId`),
-  CONSTRAINT `Donation_ibfk_3` FOREIGN KEY (`deliveryWorkerID`) REFERENCES `DeliveryWorker` (`employeeId`),
+  CONSTRAINT `Donation_ibfk_1` FOREIGN KEY (`donorID`) REFERENCES `Donor` (`donorID`),
+  CONSTRAINT `Donation_ibfk_2` FOREIGN KEY (`receiverID`) REFERENCES `Receiver` (`receiverID`),
+  CONSTRAINT `Donation_ibfk_3` FOREIGN KEY (`deliveryWorkerID`) REFERENCES `DeliveryWorker` (`employeeID`),
   CONSTRAINT `Donation_chk_1` CHECK (((`category` = _utf8mb4'Food') or (`category` = _utf8mb4'Clothes') or (`category` = _utf8mb4'Money'))),
   CONSTRAINT `Donation_chk_2` CHECK (((`status` = _utf8mb4'active') or (`status` = _utf8mb4'delivered')))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -164,7 +164,7 @@ DROP TABLE IF EXISTS `Donor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Donor` (
-  `donorId` varchar(8) NOT NULL,
+  `donorID` varchar(8) NOT NULL,
   `phone` char(10) DEFAULT NULL,
   `name` varchar(20) NOT NULL,
   `hNo` varchar(6) NOT NULL,
@@ -174,7 +174,7 @@ CREATE TABLE `Donor` (
   `state` varchar(20) NOT NULL,
   `pin` char(6) NOT NULL,
   `points` int DEFAULT '0',
-  PRIMARY KEY (`donorId`),
+  PRIMARY KEY (`donorID`),
   UNIQUE KEY `phone` (`phone`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -229,7 +229,7 @@ DROP TABLE IF EXISTS `Management`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Management` (
-  `employeeId` varchar(8) NOT NULL,
+  `employeeID` varchar(8) NOT NULL,
   `fName` varchar(20) NOT NULL,
   `lName` varchar(20) NOT NULL,
   `phone` char(10) NOT NULL,
@@ -243,10 +243,10 @@ CREATE TABLE `Management` (
   `designation` varchar(50) NOT NULL,
   `dob` date DEFAULT NULL,
   `supervisorID` varchar(8) DEFAULT NULL,
-  PRIMARY KEY (`employeeId`),
+  PRIMARY KEY (`employeeID`),
   UNIQUE KEY `phone` (`phone`),
   KEY `supervisorID` (`supervisorID`),
-  CONSTRAINT `Management_ibfk_1` FOREIGN KEY (`supervisorID`) REFERENCES `Management` (`employeeId`)
+  CONSTRAINT `Management_ibfk_1` FOREIGN KEY (`supervisorID`) REFERENCES `Management` (`employeeID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -283,7 +283,7 @@ CREATE TABLE `Orders` (
   KEY `deliveryWorkerID` (`deliveryWorkerID`),
   CONSTRAINT `Orders_ibfk_1` FOREIGN KEY (`customerID`) REFERENCES `Customer` (`phone`),
   CONSTRAINT `Orders_ibfk_2` FOREIGN KEY (`restaurantID`) REFERENCES `Restaurant` (`restaurantID`),
-  CONSTRAINT `Orders_ibfk_3` FOREIGN KEY (`deliveryWorkerID`) REFERENCES `DeliveryWorker` (`employeeId`),
+  CONSTRAINT `Orders_ibfk_3` FOREIGN KEY (`deliveryWorkerID`) REFERENCES `DeliveryWorker` (`employeeID`),
   CONSTRAINT `Orders_chk_1` CHECK (((`status` = _utf8mb4'active') or (`status` = _utf8mb4'delivered')))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -333,7 +333,7 @@ DROP TABLE IF EXISTS `Receiver`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Receiver` (
-  `receiverId` varchar(8) NOT NULL,
+  `receiverID` varchar(8) NOT NULL,
   `phone` char(10) DEFAULT NULL,
   `name` varchar(20) NOT NULL,
   `hNo` varchar(6) NOT NULL,
@@ -343,7 +343,7 @@ CREATE TABLE `Receiver` (
   `state` varchar(20) NOT NULL,
   `pin` char(6) NOT NULL,
   `accepts` varchar(20) NOT NULL,
-  PRIMARY KEY (`receiverId`),
+  PRIMARY KEY (`receiverID`),
   UNIQUE KEY `phone` (`phone`),
   CONSTRAINT `Receiver_chk_1` CHECK (((`accepts` = _utf8mb4'Meals') or (`accepts` = _utf8mb4'Money') or (`accepts` = _utf8mb4'Clothes')))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -366,19 +366,19 @@ DROP TABLE IF EXISTS `Restaurant`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Restaurant` (
-  `restaurantID` varchar(10) NOT NULL,
+  `restaurantID` varchar(8) NOT NULL,
   `type` varchar(10) DEFAULT NULL,
-  `rating` int DEFAULT NULL,
   `dayOfOpening` date DEFAULT NULL,
   `description` varchar(200) DEFAULT NULL,
   `name` varchar(50) NOT NULL,
-  `phone` char(10) DEFAULT NULL,
+  `phone` char(10) NOT NULL,
   `hNo` varchar(6) NOT NULL,
   `street` varchar(20) DEFAULT NULL,
   `city` varchar(20) NOT NULL,
   `state` varchar(20) NOT NULL,
   `pin` varchar(6) NOT NULL,
   `area` varchar(20) NOT NULL,
+  `isDineIn` tinyint(1) NOT NULL,
   PRIMARY KEY (`restaurantID`),
   CONSTRAINT `Restaurant_chk_1` CHECK (((`type` = _utf8mb4'South Indian') or (`type` = _utf8mb4'Mexican') or (`type` = _utf8mb4'Continental') or (`type` = _utf8mb4'Fast Food') or (`type` = _utf8mb4'Mughlai')))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -402,4 +402,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-17 23:55:14
+-- Dump completed on 2021-02-18 21:09:40
