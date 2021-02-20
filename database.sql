@@ -354,11 +354,6 @@ CREATE TABLE `Receiver` (
   `accepts` varchar(20) NOT NULL,
   PRIMARY KEY (`receiverID`),
   UNIQUE KEY `phone` (`phone`),
-  UNIQUE KEY `phone_2` (`phone`),
-  UNIQUE KEY `phone_3` (`phone`),
-  UNIQUE KEY `phone_4` (`phone`),
-  UNIQUE KEY `phone_5` (`phone`),
-  UNIQUE KEY `phone_6` (`phone`),
   CONSTRAINT `acceptsContraint` CHECK (((`accepts` = _utf8mb4'Money') or (`accepts` = _utf8mb4'Clothes') or (`accepts` = _utf8mb4'Meals')))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
