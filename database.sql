@@ -23,9 +23,9 @@ DROP TABLE IF EXISTS `Contains`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Contains` (
-  `foodID` varchar(8) DEFAULT NULL,
-  `orderID` varchar(8) DEFAULT NULL,
-  `quantity` int DEFAULT NULL,
+  `foodID` varchar(8) NOT NULL,
+  `orderID` varchar(8) NOT NULL,
+  `quantity` int NOT NULL,
   KEY `foodID` (`foodID`),
   KEY `orderID` (`orderID`),
   CONSTRAINT `Contains_ibfk_1` FOREIGN KEY (`foodID`) REFERENCES `Food` (`itemID`),
@@ -62,7 +62,7 @@ CREATE TABLE `Customer` (
   `state` varchar(20) NOT NULL,
   `pin` char(6) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `customerType` varchar(20) NOT NULL,
+  `customerType` varchar(20) NOT NULL DEFAULT 'normal',
   `dob` date DEFAULT NULL,
   PRIMARY KEY (`phone`),
   UNIQUE KEY `email` (`email`),
@@ -93,8 +93,8 @@ CREATE TABLE `DeliveryWorker` (
   `fName` varchar(20) NOT NULL,
   `lName` varchar(20) NOT NULL,
   `phone` char(10) NOT NULL,
-  `salary` int DEFAULT NULL,
-  `dob` date DEFAULT NULL,
+  `salary` int NOT NULL,
+  `dob` date NOT NULL,
   `hNo` varchar(6) NOT NULL,
   `street` varchar(20) DEFAULT NULL,
   `area` varchar(20) NOT NULL,
@@ -103,8 +103,8 @@ CREATE TABLE `DeliveryWorker` (
   `pin` char(6) NOT NULL,
   `socialCause` tinyint(1) NOT NULL DEFAULT '0',
   `tips` int NOT NULL DEFAULT '0',
-  `supervisorID` varchar(8) DEFAULT NULL,
-  `fuelAmt` int DEFAULT '2000',
+  `supervisorID` varchar(8) NOT NULL,
+  `fuelAmt` int NOT NULL DEFAULT '2000',
   PRIMARY KEY (`employeeID`),
   UNIQUE KEY `phone` (`phone`),
   KEY `supervisorID` (`supervisorID`),
@@ -136,8 +136,8 @@ CREATE TABLE `Donation` (
   `deliveryWorkerID` varchar(8) NOT NULL,
   `dateTime` date DEFAULT NULL,
   `category` varchar(10) NOT NULL,
-  `status` varchar(15) DEFAULT NULL,
-  `quantity` int DEFAULT (1),
+  `status` varchar(15) NOT NULL DEFAULT 'active',
+  `quantity` int NOT NULL DEFAULT '1',
   PRIMARY KEY (`donationID`),
   KEY `donorID` (`donorID`),
   KEY `receiverID` (`receiverID`),
@@ -169,8 +169,8 @@ DROP TABLE IF EXISTS `Donor`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Donor` (
   `donorID` varchar(8) NOT NULL,
-  `phone` char(10) DEFAULT NULL,
-  `name` varchar(20) NOT NULL,
+  `phone` char(10) NOT NULL,
+  `name` varchar(20) DEFAULT NULL,
   `hNo` varchar(6) NOT NULL,
   `street` varchar(20) DEFAULT NULL,
   `area` varchar(20) NOT NULL,
@@ -202,14 +202,14 @@ DROP TABLE IF EXISTS `Food`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Food` (
   `itemID` varchar(8) NOT NULL,
-  `name` varchar(100) DEFAULT NULL,
+  `name` varchar(100) NOT NULL,
   `price` decimal(7,2) NOT NULL,
-  `isAvailable` tinyint(1) DEFAULT NULL,
+  `isAvailable` tinyint(1) NOT NULL DEFAULT '1',
   `imagePath` varchar(200) DEFAULT NULL,
-  `isVeg` tinyint(1) DEFAULT NULL,
+  `isVeg` tinyint(1) NOT NULL,
   `category` varchar(20) DEFAULT NULL,
   `discount` int DEFAULT '0',
-  `restaurantID` varchar(10) DEFAULT NULL,
+  `restaurantID` varchar(10) NOT NULL,
   PRIMARY KEY (`itemID`),
   KEY `restaurantID` (`restaurantID`),
   CONSTRAINT `Food_ibfk_1` FOREIGN KEY (`restaurantID`) REFERENCES `Restaurant` (`restaurantID`),
@@ -239,7 +239,7 @@ CREATE TABLE `Management` (
   `fName` varchar(20) NOT NULL,
   `lName` varchar(20) NOT NULL,
   `phone` char(10) NOT NULL,
-  `salary` int DEFAULT NULL,
+  `salary` int NOT NULL,
   `hNo` varchar(6) NOT NULL,
   `street` varchar(20) DEFAULT NULL,
   `area` varchar(20) NOT NULL,
@@ -247,7 +247,7 @@ CREATE TABLE `Management` (
   `state` varchar(20) NOT NULL,
   `pin` char(6) NOT NULL,
   `designation` varchar(50) NOT NULL,
-  `dob` date DEFAULT NULL,
+  `dob` date NOT NULL,
   `supervisorID` varchar(8) DEFAULT NULL,
   PRIMARY KEY (`employeeID`),
   UNIQUE KEY `phone` (`phone`),
@@ -275,13 +275,13 @@ DROP TABLE IF EXISTS `Orders`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Orders` (
   `orderID` varchar(8) NOT NULL,
-  `status` varchar(20) NOT NULL,
-  `dateTime` datetime DEFAULT NULL,
-  `billAmt` decimal(6,2) DEFAULT NULL,
+  `status` varchar(20) NOT NULL DEFAULT 'Active',
+  `dateTime` datetime NOT NULL,
+  `billAmt` decimal(6,2) NOT NULL,
   `paymentMode` varchar(20) NOT NULL,
-  `customerID` char(10) DEFAULT NULL,
-  `restaurantID` varchar(8) DEFAULT NULL,
-  `deliveryWorkerID` varchar(8) DEFAULT NULL,
+  `customerID` char(10) NOT NULL,
+  `restaurantID` varchar(8) NOT NULL,
+  `deliveryWorkerID` varchar(8) NOT NULL,
   `discount` int DEFAULT '0',
   `tip` decimal(5,2) DEFAULT (0),
   PRIMARY KEY (`orderID`),
@@ -343,7 +343,7 @@ DROP TABLE IF EXISTS `Receiver`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Receiver` (
   `receiverID` varchar(8) NOT NULL,
-  `phone` char(10) DEFAULT NULL,
+  `phone` char(10) NOT NULL,
   `name` varchar(100) DEFAULT NULL,
   `hNo` varchar(6) NOT NULL,
   `street` varchar(20) DEFAULT NULL,
@@ -354,6 +354,11 @@ CREATE TABLE `Receiver` (
   `accepts` varchar(20) NOT NULL,
   PRIMARY KEY (`receiverID`),
   UNIQUE KEY `phone` (`phone`),
+  UNIQUE KEY `phone_2` (`phone`),
+  UNIQUE KEY `phone_3` (`phone`),
+  UNIQUE KEY `phone_4` (`phone`),
+  UNIQUE KEY `phone_5` (`phone`),
+  UNIQUE KEY `phone_6` (`phone`),
   CONSTRAINT `acceptsContraint` CHECK (((`accepts` = _utf8mb4'Money') or (`accepts` = _utf8mb4'Clothes') or (`accepts` = _utf8mb4'Meals')))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -387,8 +392,8 @@ CREATE TABLE `Restaurant` (
   `state` varchar(20) NOT NULL,
   `pin` varchar(6) NOT NULL,
   `area` varchar(20) NOT NULL,
-  `isDineIn` tinyint(1) NOT NULL,
-  `sNo` varchar(6) DEFAULT NULL,
+  `isDineIn` tinyint(1) DEFAULT NULL,
+  `sNo` varchar(6) NOT NULL,
   PRIMARY KEY (`restaurantID`),
   CONSTRAINT `checkRestaurantType` CHECK (((`type` = _utf8mb4'South Indian') or (`type` = _utf8mb4'Mexican') or (`type` = _utf8mb4'Continental') or (`type` = _utf8mb4'Fast Food') or (`type` = _utf8mb4'Mughlai') or (`type` = _utf8mb4'North Indian') or (`type` = _utf8mb4'Chinese')))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -413,4 +418,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-19 17:34:19
+-- Dump completed on 2021-02-21  4:51:47
