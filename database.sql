@@ -83,6 +83,24 @@ INSERT INTO `Customer` VALUES ('8214556085','Jaibir','Dhillon','110078','10','Um
 UNLOCK TABLES;
 
 --
+-- Temporary view structure for view `CustomerDetails`
+--
+
+DROP TABLE IF EXISTS `CustomerDetails`;
+/*!50001 DROP VIEW IF EXISTS `CustomerDetails`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `CustomerDetails` AS SELECT 
+ 1 AS `phone`,
+ 1 AS `fName`,
+ 1 AS `lName`,
+ 1 AS `email`,
+ 1 AS `state`,
+ 1 AS `customerType`,
+ 1 AS `dob`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `DeliveryWorker`
 --
 
@@ -122,6 +140,24 @@ LOCK TABLES `DeliveryWorker` WRITE;
 INSERT INTO `DeliveryWorker` VALUES ('E250800','Kamakshya','Sharaf','8705208145',24200,'1987-02-05','129','14','Peelamedu','New Delhi','Delhi','110025',1,0,'S540990',2000),('E250802','Kesar','Shukla','9933512513',23200,'1986-08-03','21','10','Modinagar','New Delhi','Delhi','110047',0,0,'S540991',2000),('E250804','Kaptan','Mittal','8488872531',24100,'1987-10-24','230','26','Dhanbad Road','New Delhi','Delhi','110074',0,0,'S540989',2000),('E250806','Shela','Palla','8903424890',25400,'1977-06-29','175','7','City of Thane','New Delhi','Delhi','110076',1,0,'S540990',2000),('E250808','Ramnihor','Goel','8929400879',21900,'2000-05-16','162','26','Sirsi Road','New Delhi','Delhi','110045',0,0,'S540991',2000),('E250810','Yashmin','Taneja','8414780251',26700,'1993-02-28','184','24','Faridabad','New Delhi','Delhi','110005',1,0,'S540989',2000),('E250812','Marzina','Viswanathan','8381836777',20900,'1999-02-26','184','16','Pandu Nagar','New Delhi','Delhi','110087',0,0,'S540990',2000),('E250814','Deepka','Naidu','9859648598',24800,'1976-07-05','267','2','Dwarka','New Delhi','Delhi','110074',1,0,'S540991',2000),('E250816','Pankaj','Desai','9340713951',24000,'1975-01-23','257','19','Jamshedpur','New Delhi','Delhi','110010',1,0,'S540989',2000),('E250818','Subesh','Parsa','8704986828',26700,'1984-04-08','136','14','Napier Town','New Delhi','Delhi','110096',0,0,'S540990',2000),('E250820','Ravindera','Verma','9280786847',21100,'1985-01-04','254','30','Chandigarh','New Delhi','Delhi','110056',0,0,'S540991',2000),('E250822','Nitin','Murthy','8351200904',20100,'1992-01-18','140','1','Peelamedu','New Delhi','Delhi','110033',1,0,'S540989',2000),('E250824','Nibha','Prasad','9334807355',21600,'1989-06-01','141','12','Sinnar','New Delhi','Delhi','110073',0,0,'S540990',2000),('E250826','Baleshwer','Mohanty','8752386691',20300,'1999-05-03','73','30','Bandra','New Delhi','Delhi','110079',0,0,'S540991',2000),('E250828','Kismti','Goswami','8496526674',22400,'1987-07-13','245','17','Badalpura','New Delhi','Delhi','110088',0,0,'S540989',2000),('E250830','Rambir','Gupta','9231806535',25400,'1996-03-17','298','7','City of Thane','New Delhi','Delhi','110019',1,0,'S540990',2000),('E250832','Sushma','Dhaliwal','8268233798',22700,'1991-11-04','234','5','Bah','New Delhi','Delhi','110069',0,0,'S540991',2000),('E250834','Tunni','Reddy','8440164945',23800,'1999-10-29','48','29','Airohi','New Delhi','Delhi','110020',0,0,'S540989',2000),('E250836','Rustam','Seshadri','8308356704',24300,'1981-08-28','64','14','Volad','New Delhi','Delhi','110075',0,0,'S540990',2000),('E250838','Manvendra','Raja','9848116775',21200,'1985-03-05','235','23','Ellis Nagar','New Delhi','Delhi','110095',1,0,'S540991',2000),('E250840','Sanjogta','Deshmukh','8245146126',25100,'1990-01-27','200','13','Raisen','New Delhi','Delhi','110050',0,0,'S540989',2000),('E250842','Madhvi','Sidhu','9493245349',24100,'1996-04-22','140','2','Rajgarh','New Delhi','Delhi','110023',1,0,'S540990',2000),('E250844','Kashis','Sabharwal','8814878359',26500,'1999-03-09','253','17','Juhu','New Delhi','Delhi','110067',0,0,'S540991',2000),('E250846','Kumare','Sharma','8650129106',20600,'1988-12-13','172','2','Narsipatnam','New Delhi','Delhi','110005',1,0,'S540989',2000),('E250848','Krishan','Ghosh','9687879391',26800,'1995-06-04','7','10','Shivaji Nagar','New Delhi','Delhi','110084',0,0,'S540990',2000),('E250850','Ansu','Sarkar','9292297245',22800,'1983-11-20','194','22','South Solapur','New Delhi','Delhi','110078',0,0,'S540991',2000),('E250852','Rimzim','Khurana','8440276155',20100,'2000-08-05','195','1','Shivaji Nagar','New Delhi','Delhi','110021',0,0,'S540989',2000),('E250854','Dhramveer','Sandal','9809443217',26600,'1988-10-17','79','7','City of Thane','New Delhi','Delhi','110009',0,0,'S540990',2000),('E250856','Budho','Nath','9545817375',22000,'1977-04-08','61','30','Benipur','New Delhi','Delhi','110087',1,0,'S540991',2000),('E250858','Veeru','Pradhan','9442700486',24300,'1997-03-04','122','23','Gomti Nagar','New Delhi','Delhi','110008',1,0,'S540989',2000),('E250860','Mangelal','Bhalla','9362620532',21600,'1985-10-22','28','28','Pimpri','New Delhi','Delhi','110058',0,0,'S540990',2000),('E250862','Munish','Rajagopal','8695305111',23000,'1998-12-25','165','25','Prayagraj','New Delhi','Delhi','110057',0,0,'S540991',2000),('E250864','Rashimi','Pal','9666638176',25400,'1992-05-09','248','22','Badalpura','New Delhi','Delhi','110018',1,0,'S540989',2000),('E250866','Sobi','Tara','9512975244',20800,'1999-01-27','293','10','Gomti Nagar','New Delhi','Delhi','110051',1,0,'S540990',2000),('E250868','Roma','Guha','8783446052',23700,'1979-02-12','72','4','Chinchwad','New Delhi','Delhi','110041',1,0,'S540991',2000),('E250870','Saniya','Mehra','9789132579',24500,'1981-01-22','257','30','Ameerpet','New Delhi','Delhi','110078',0,0,'S540989',2000),('E250872','Panchuram','Shroff','9405648623',23000,'1993-11-09','290','28','North Solapur','New Delhi','Delhi','110096',0,0,'S540990',2000),('E250874','Khusbu','Grover','9509121140',21500,'1989-06-10','228','20','Ghansoli','New Delhi','Delhi','110055',0,0,'S540991',2000),('E250876','Imaman','Saxena','8374255198',20100,'1975-12-03','197','17','Wright Town','New Delhi','Delhi','110018',0,0,'S540989',2000),('E250878','Chatar','Kashyap','9939815208',23900,'1986-09-22','14','1','Narsipatnam','New Delhi','Delhi','110010',0,0,'S540990',2000),('E250880','Laldhari','Solanki','9590982428',26600,'1980-01-05','74','2','Ahmedabad','New Delhi','Delhi','110096',1,0,'S540991',2000),('E250882','Nishu','Varty','9290367248',24900,'1975-11-11','201','27','Defence Colony','New Delhi','Delhi','110088',1,0,'S540989',2000),('E250884','Laltha','Mehrotra','8204471598',21200,'1978-09-18','118','29','Aamby Valley City','New Delhi','Delhi','110073',1,0,'S540990',2000),('E250886','Salmakhatun','Sunder','9642322954',21900,'1975-05-08','196','20','Kavi Nagar','New Delhi','Delhi','110024',1,0,'S540991',2000),('E250888','Babali','Khanna','9366210656',22300,'1987-11-07','168','17','Songadh','New Delhi','Delhi','110004',0,0,'S540991',2000),('E250890','Jitendera','Joshi','9421132652',25300,'1984-11-18','266','25','Pimpri','New Delhi','Delhi','110019',0,0,'S540989',2000),('E250892','Surendr','Acharya','9987728730',24500,'1981-10-23','82','1','City of Thane','New Delhi','Delhi','110020',0,0,'S540990',2000),('E250894','Unkar','Garg','8233444543',26300,'1989-04-29','119','5','Ahmedabad','New Delhi','Delhi','110039',0,0,'S540991',2000),('E250896','Anjuman','Sundaram','9523775781',25800,'1994-08-07','32','16','Dharwad','New Delhi','Delhi','110016',1,0,'S540989',2000),('E250898','Majrula','Kohli','9241964675',25200,'1998-03-08','119','28','Chandra Nagar','New Delhi','Delhi','110063',1,0,'S540990',2000);
 /*!40000 ALTER TABLE `DeliveryWorker` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `DeliveryWorkerDetails`
+--
+
+DROP TABLE IF EXISTS `DeliveryWorkerDetails`;
+/*!50001 DROP VIEW IF EXISTS `DeliveryWorkerDetails`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `DeliveryWorkerDetails` AS SELECT 
+ 1 AS `employeeID`,
+ 1 AS `fName`,
+ 1 AS `lName`,
+ 1 AS `phone`,
+ 1 AS `socialCause`,
+ 1 AS `supervisorID`,
+ 1 AS `dob`*/;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `Donation`
@@ -195,6 +231,22 @@ INSERT INTO `Donor` VALUES ('D1087300','9189307475','Ajay Khatri','232','15','Ba
 UNLOCK TABLES;
 
 --
+-- Temporary view structure for view `DonorDetails`
+--
+
+DROP TABLE IF EXISTS `DonorDetails`;
+/*!50001 DROP VIEW IF EXISTS `DonorDetails`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `DonorDetails` AS SELECT 
+ 1 AS `donorID`,
+ 1 AS `phone`,
+ 1 AS `name`,
+ 1 AS `state`,
+ 1 AS `points`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `Food`
 --
 
@@ -263,6 +315,24 @@ LOCK TABLES `Management` WRITE;
 INSERT INTO `Management` VALUES ('S540989','Amrudin','Khan','8151606180',18000,'44','3','Baba Bakala','New Delhi','Delhi','110079','Assistant Operations Manager','1999-07-24'),('S540990','Sayana','Malik','8135733333',18000,'264','1','Aamby Valley City','New Delhi','Delhi','110044','Assistant Operations Manager','1992-12-12'),('S540991','Budhi','Thakkar','9151773815',19500,'130','22','Modinagar','New Delhi','Delhi','110014','Assistant Operations Manager','1993-08-05'),('S540992','Dulichand','Setty','9157460710',19500,'92','12','Gomti Nagar','New Delhi','Delhi','110081','Assistant manager','1999-06-14'),('S540993','Khajan','Thaker','9138257445',19500,'238','17','Jalna','New Delhi','Delhi','110082','Assistant manager','1992-12-01'),('S540994','Binnu','Chakraborty','9168983353',19500,'177','11','Bally','New Delhi','Delhi','110027','Assistant manager','1975-05-18'),('S540995','Ajaypal','Arya','9185335054',19500,'175','17','Chandra Nagar','New Delhi','Delhi','110031','Assistant manager','1982-11-09'),('S540996','Koilu','Pall','9162571972',23000,'136','10','Rajgarh','New Delhi','Delhi','110056','Associate manager','1981-07-27'),('S540997','Chandu','Varghese','9162180931',26000,'102','2','Aamby Valley City','New Delhi','Delhi','110048','Coordinator','1995-06-26'),('S540998','Satendra','Prabhu','9177576318',26000,'138','26','Shivaji Nagar','New Delhi','Delhi','110046','Coordinator','1984-04-11'),('S540999','Kusum','Sehgal','8193479439',18000,'250','10','Andheri','New Delhi','Delhi','110084','Management trainee','1978-08-03'),('S541000','Bhulan','Sankaran','8198207421',15600,'298','11','Gondal','New Delhi','Delhi','110008','Shift manager','1992-03-23'),('S541001','Dhananjay','Bajaj','9188857515',23000,'188','16','Chitradurga','New Delhi','Delhi','110014','Associate manager','1998-03-28'),('S541002','Priti','Doshi','8187963638',19500,'243','12','Vigyan Nagar','New Delhi','Delhi','110022','Head of marketing','1989-05-07'),('S541003','Sanjai','Datta','8183700945',19500,'260','18','Narsipatnam','New Delhi','Delhi','110076','Assistant manager','1985-08-08'),('S541004','Parmjeet','Dhawan','8154190531',18000,'184','15','Vasai','New Delhi','Delhi','110063','Head of operations','1986-10-03'),('S541005','Karma','Ganguly','9135906646',23000,'163','18','Mangalagiri','New Delhi','Delhi','110098','Associate manager','1996-05-08'),('S541006','Vashudev','Prashad','9140700390',18000,'7','5','Ajnala','New Delhi','Delhi','110016','Management trainee','1997-06-29'),('S541007','Sayana','Vaidya','9180349902',19500,'12','15','Ahmedabad','New Delhi','Delhi','110092','Accountant','2000-01-07'),('S541008','Budhi','Talwar','9195497953',26000,'84','2','Vigyan Nagar','New Delhi','Delhi','110090','General manager','1998-12-07'),('S541009','Dulichand','Sekhon','9168678054',23000,'81','12','Ahmedabad','New Delhi','Delhi','110085','Associate manager','1988-08-23'),('S541010','Khajan','Chand','9163523740',19500,'211','7','Lekha Nagar','New Delhi','Delhi','110040','Junior accountant','1977-11-04'),('S541011','Chandni','Bhattacharyya','8195962781',18000,'91','8','Rajgarh','New Delhi','Delhi','110043','Chartered Accountant','1993-09-09'),('S541012','Naina','Malhotra','8181872937',19500,'270','13','Sudder Street','New Delhi','Delhi','110011','Assistant manager','1986-02-16'),('S541013','Umlesh','Yohannan','9171449960',23000,'42','30','Chinchwad','New Delhi','Delhi','110065','Associate manager','1981-06-29'),('S541014','Lajjavati','Dube','8143350784',19500,'53','9','Fatehpur Sikri','New Delhi','Delhi','110031','Operations Manager','1975-12-22'),('S541015','Pachuram','Vala','9143812225',19500,'209','24','Mangalagiri','New Delhi','Delhi','110077','CFO','1986-11-11'),('S541016','Gori','Thaman','8165933782',18000,'45','3','Raisen','New Delhi','Delhi','110044','CEO','1982-11-25');
 /*!40000 ALTER TABLE `Management` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `ManagementDetails`
+--
+
+DROP TABLE IF EXISTS `ManagementDetails`;
+/*!50001 DROP VIEW IF EXISTS `ManagementDetails`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `ManagementDetails` AS SELECT 
+ 1 AS `employeeID`,
+ 1 AS `fName`,
+ 1 AS `lName`,
+ 1 AS `phone`,
+ 1 AS `state`,
+ 1 AS `dob`,
+ 1 AS `designation`*/;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `Orders`
@@ -368,6 +438,22 @@ INSERT INTO `Receiver` VALUES ('R320100','8882089591','AAINA','20','27','Neb Sar
 UNLOCK TABLES;
 
 --
+-- Temporary view structure for view `ReceiverDetails`
+--
+
+DROP TABLE IF EXISTS `ReceiverDetails`;
+/*!50001 DROP VIEW IF EXISTS `ReceiverDetails`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `ReceiverDetails` AS SELECT 
+ 1 AS `receiverID`,
+ 1 AS `name`,
+ 1 AS `phone`,
+ 1 AS `state`,
+ 1 AS `accepts`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `Restaurant`
 --
 
@@ -402,6 +488,96 @@ LOCK TABLES `Restaurant` WRITE;
 INSERT INTO `Restaurant` VALUES ('R002150','North Indian','2000-07-24','Apna Dhaba was opened on 2000-07-24 and serves North Indian.','Apna Dhaba','8555453656','Bose Street','Udyog Bhawan','New Delhi','Delhi','110011',1,'211'),('R002151','Mexican','2013-12-12','Akira Back was opened on 2013-12-12 and serves Mexican.','Akira Back','7555836595','Setty Street','Niman nagar','Sonipath','Delhi','110023',1,'283'),('R002152','North Indian','2010-08-05','Andaz Bar was opened on 2010-08-05 and serves North Indian.','Andaz Bar','9955575519','Bajaj Street','Hasanpur','Gurugram','Delhi','122105',1,'185'),('R002153','South Indian','2008-06-14','AnnaMaya was opened on 2008-06-14 and serves South Indian.','AnnaMaya','9155504539','Rampersad Street','Karol Bagh','New Delhi','Delhi','110005',1,'13'),('R002154','South Indian','2014-12-01','Bangalore Spices was opened on 2014-12-01 and serves South Indian.','Bangalore Spices','9555575341','Saxena Street','Jama Maszid','Faridabad','Delhi','110066',0,'7'),('R002155','Chinese','2014-05-18','Berco\'s was opened on 2014-05-18 and serves Chinese.','Berco\'s','8555097907','Nagi Street','Abupur','Gaziabad','Delhi','201206',1,'63'),('R002156','Chinese','2012-11-09','Biejing Bites was opened on 2012-11-09 and serves Chinese.','Biejing Bites','9755580323','Sarkar Street','Hauz Khaz','New Delhi','Delhi','110006',1,'43'),('R002157','Mughlai','2010-07-27','Biryani Restaurant was opened on 2010-07-27 and serves Mughlai.','Biryani Restaurant','8555089685','Gobin Street','Indian Post Office','Connaught Place','Delhi','110001',0,'86'),('R002158','Mexican','2015-06-26','Blue Collar was opened on 2015-06-26 and serves Mexican.','Blue Collar','7555538850','Kohli Street','Malviya Nagar','New Delhi','Delhi','422002',1,'105'),('R002159','North Indian','2009-04-11','Bollywood Spice was opened on 2009-04-11 and serves North Indian.','Bollywood Spice','7555697056','Ghosh Street','Rajput','New Delhi','Delhi','388292',1,'137'),('R002160','South Indian','2004-08-03','Bombay Pakwaan was opened on 2004-08-03 and serves South Indian.','Bombay Pakwaan','8555856581','Meka Street','Chhatarpur','New Delhi','Delhi','898493',1,'11'),('R002161','Mexican','2007-03-23','Brewed Awakening was opened on 2007-03-23 and serves Mexican.','Brewed Awakening','8555115469','Sood Street','Gomtiput','New Delhi','Delhi','374844',0,'215'),('R002162','North Indian','2014-03-28','Burma Burma Restaurant was opened on 2014-03-28 and serves North Indian.','Burma Burma Restaurant','8555920913','Rampersad Street','Andheri','Gurugram','Delhi','232233',0,'258'),('R002163','Continental','2007-05-07','Bursty BiteContinental was opened on 2007-05-07 and serves Continental.','Bursty BiteContinental','8555968067','Chhabra Street','Ambli','Mehrauli','Delhi','983943',0,'188'),('R002164','Mexican','2010-08-08','Cafe Pluck was opened on 2010-08-08 and serves Mexican.','Cafe Pluck','8555945635','Parikh Street','Ameerpet','New Delhi','Delhi','110017',1,'246'),('R002165','Continental','2006-10-03','California Pizza Kitchen was opened on 2006-10-03 and serves Continental.','California Pizza Kitchen','7555458014','Mane Street','Balrampur','New Delhi','Delhi','110054',1,'190'),('R002166','Fast Food','2009-05-08','Chaat Mehal was opened on 2009-05-08 and serves Fast Food.','Chaat Mehal','8555330731','Bail Street','Amber Nagar','New Delhi','Delhi','471001',1,'292'),('R002167','North Indian','2001-06-29','Chai Marke was opened on 2001-06-29 and serves North Indian.','Chai Marke','8555831248','Bose Street','Udyog Bhawan','New Delhi','Delhi','110011',1,'154'),('R002168','North Indian','2006-01-07','Chamcha Lounge was opened on 2006-01-07 and serves North Indian.','Chamcha Lounge','7555689699','Setty Street','Niman nagar','Sonipath','Delhi','110023',0,'113'),('R002169','Fast Food','2010-12-07','Chart House was opened on 2010-12-07 and serves Fast Food.','Chart House','9955573265','Bajaj Street','Hasanpur','Gurugram','Delhi','122105',0,'96'),('R002170','Chinese','2005-08-23','Chez Billy Sud was opened on 2005-08-23 and serves Chinese.','Chez Billy Sud','9455568872','Rampersad Street','Karol Bagh','New Delhi','Delhi','110005',1,'267'),('R002171','Mexican','2010-11-04','Conch it Up Soul Food was opened on 2010-11-04 and serves Mexican.','Conch it Up Soul Food','9055582244','Saxena Street','Jama Maszid','Faridabad','Delhi','110066',1,'195'),('R002172','Mexican','2008-09-09','Crest Cafe was opened on 2008-09-09 and serves Mexican.','Crest Cafe','9255517943','Nagi Street','Abupur','Gaziabad','Delhi','201206',0,'213'),('R002173','Mughlai','2014-02-16','Curry Cafe was opened on 2014-02-16 and serves Mughlai.','Curry Cafe','7555373351','Sarkar Street','Hauz Khaz','New Delhi','Delhi','110006',0,'112'),('R002174','North Indian','2014-06-29','Curry Mahal was opened on 2014-06-29 and serves North Indian.','Curry Mahal','7555416933','Gobin Street','Indian Post Office','Connaught Place','Delhi','110001',0,'69'),('R002175','Continental','2013-12-22','Daily Grill was opened on 2013-12-22 and serves Continental.','Daily Grill','9755546124','Kohli Street','Malviya Nagar','New Delhi','Delhi','422002',1,'240'),('R002176','North Indian','2000-11-11','Delhi Club was opened on 2000-11-11 and serves North Indian.','Delhi Club','7555498644','Ghosh Street','Rajput','New Delhi','Delhi','388292',1,'241'),('R002177','North Indian','2007-11-25','Desi Palace was opened on 2007-11-25 and serves North Indian.','Desi Palace','7555872065','Meka Street','Chhatarpur','New Delhi','Delhi','898493',1,'177'),('R002178','North Indian','2012-07-24','DeviDining was opened on 2012-07-24 and serves North Indian.','DeviDining','8555379942','Sood Street','Gomtiput','New Delhi','Delhi','374844',1,'66'),('R002179','Mexican','2004-12-12','Dine Fine was opened on 2004-12-12 and serves Mexican.','Dine Fine','8555998514','Rampersad Street','Andheri','Gurugram','Delhi','232233',0,'269'),('R002180','Continental','2005-08-05','Dinner Club was opened on 2005-08-05 and serves Continental.','Dinner Club','7555606056','Chhabra Street','Ambli','Mehrauli','Delhi','983943',0,'204'),('R002181','South Indian','2001-06-14','Dosa Lounge was opened on 2001-06-14 and serves South Indian.','Dosa Lounge','8555206485','Parikh Street','Ameerpet','New Delhi','Delhi','110017',0,'142'),('R002182','North Indian','2011-12-01','Dosalon Chai was opened on 2011-12-01 and serves North Indian.','Dosalon Chai','9655566222','Mane Street','Balrampur','New Delhi','Delhi','110054',0,'16'),('R002183','Mexican','2014-05-18','Double Decker was opened on 2014-05-18 and serves Mexican.','Double Decker','8555969090','Bail Street','Amber Nagar','New Delhi','Delhi','471001',1,'6'),('R002184','Fast Food','2003-11-09','Double Knot was opened on 2003-11-09 and serves Fast Food.','Double Knot','8555798130','Bose Street','Udyog Bhawan','New Delhi','Delhi','110011',1,'230'),('R002185','Continental','2015-07-27','El Pirata Porch was opened on 2015-07-27 and serves Continental.','El Pirata Porch','7555974527','Setty Street','Niman nagar','Sonipath','Delhi','110023',1,'261'),('R002186','Mexican','2006-06-26','Exotic Rooftop Restaurant was opened on 2006-06-26 and serves Mexican.','Exotic Rooftop Restaurant','9055522857','Bajaj Street','Hasanpur','Gurugram','Delhi','122105',1,'278'),('R002187','North Indian','2004-04-11','Famous Lunch was opened on 2004-04-11 and serves North Indian.','Famous Lunch','9555570432','Rampersad Street','Karol Bagh','New Delhi','Delhi','110005',1,'214'),('R002188','Fast Food','2015-08-03','FatJar Cafe & Market was opened on 2015-08-03 and serves Fast Food.','FatJar Cafe & Market','7555101720','Saxena Street','Jama Maszid','Faridabad','Delhi','110066',1,'257'),('R002189','Continental','2001-03-23','Flavoroso was opened on 2001-03-23 and serves Continental.','Flavoroso','8555005247','Nagi Street','Abupur','Gaziabad','Delhi','201206',1,'8'),('R002190','Continental','2015-03-28','Fog Harbor Fish House was opened on 2015-03-28 and serves Thai.','Fog Harbor Fish House','9555537419','Sarkar Street','Hauz Khaz','New Delhi','Delhi','110006',1,'110'),('R002191','Continental','2008-05-07','Food Castle was opened on 2008-05-07 and serves Continental.','Food Castle','8555833241','Gobin Street','Indian Post Office','Connaught Place','Delhi','110001',0,'182'),('R002192','Mexican','2006-08-08','Food Exchange was opened on 2006-08-08 and serves Mexican.','Food Exchange','8555669058','Kohli Street','Malviya Nagar','New Delhi','Delhi','422002',0,'201'),('R002193','Chinese','2008-10-03','Fried Chicken was opened on 2008-10-03 and serves Chinese.','Fried Chicken','9755521446','Ghosh Street','Rajput','New Delhi','Delhi','388292',0,'218'),('R002194','Chinese','2013-05-08','Fuji Japanese Restaurant was opened on 2013-05-08 and serves Chinese.','Fuji Japanese Restaurant','8555009990','Meka Street','Chhatarpur','New Delhi','Delhi','898493',1,'145'),('R002195','South Indian','2011-06-29','Full Moon was opened on 2011-06-29 and serves South Indian.','Full Moon','6555209805','Sood Street','Gomtiput','New Delhi','Delhi','374844',1,'134'),('R002196','North Indian','2008-01-07','Garage Kitchen + Bar was opened on 2008-01-07 and serves North Indian.','Garage Kitchen + Bar','8555068368','Rampersad Street','Andheri','Gurugram','Delhi','232233',1,'136'),('R002197','Mexican','2001-12-07','Gaslamp Fish House was opened on 2001-12-07 and serves Mexican.','Gaslamp Fish House','9755507794','Chhabra Street','Ambli','Mehrauli','Delhi','983943',1,'57'),('R002198','North Indian','2011-08-23','Grandma’s Sweets was opened on 2011-08-23 and serves North Indian.','Grandma’s Sweets','8555361429','Parikh Street','Ameerpet','New Delhi','Delhi','110017',1,'153');
 /*!40000 ALTER TABLE `Restaurant` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Final view structure for view `CustomerDetails`
+--
+
+/*!50001 DROP VIEW IF EXISTS `CustomerDetails`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`nandikajain`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `CustomerDetails` AS select `Customer`.`phone` AS `phone`,`Customer`.`fName` AS `fName`,`Customer`.`lName` AS `lName`,`Customer`.`email` AS `email`,`Customer`.`state` AS `state`,`Customer`.`customerType` AS `customerType`,`Customer`.`dob` AS `dob` from `Customer` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `DeliveryWorkerDetails`
+--
+
+/*!50001 DROP VIEW IF EXISTS `DeliveryWorkerDetails`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`nandikajain`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `DeliveryWorkerDetails` AS select `DeliveryWorker`.`employeeID` AS `employeeID`,`DeliveryWorker`.`fName` AS `fName`,`DeliveryWorker`.`lName` AS `lName`,`DeliveryWorker`.`phone` AS `phone`,`DeliveryWorker`.`socialCause` AS `socialCause`,`DeliveryWorker`.`supervisorID` AS `supervisorID`,`DeliveryWorker`.`dob` AS `dob` from `DeliveryWorker` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `DonorDetails`
+--
+
+/*!50001 DROP VIEW IF EXISTS `DonorDetails`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`nandikajain`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `DonorDetails` AS select `Donor`.`donorID` AS `donorID`,`Donor`.`phone` AS `phone`,`Donor`.`name` AS `name`,`Donor`.`state` AS `state`,`Donor`.`points` AS `points` from `Donor` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `ManagementDetails`
+--
+
+/*!50001 DROP VIEW IF EXISTS `ManagementDetails`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`nandikajain`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `ManagementDetails` AS select `Management`.`employeeID` AS `employeeID`,`Management`.`fName` AS `fName`,`Management`.`lName` AS `lName`,`Management`.`phone` AS `phone`,`Management`.`state` AS `state`,`Management`.`dob` AS `dob`,`Management`.`designation` AS `designation` from `Management` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `ReceiverDetails`
+--
+
+/*!50001 DROP VIEW IF EXISTS `ReceiverDetails`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`nandikajain`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `ReceiverDetails` AS select `Receiver`.`receiverID` AS `receiverID`,`Receiver`.`name` AS `name`,`Receiver`.`phone` AS `phone`,`Receiver`.`state` AS `state`,`Receiver`.`accepts` AS `accepts` from `Receiver` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -412,4 +588,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-03 15:53:15
+-- Dump completed on 2021-04-06  4:29:06
