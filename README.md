@@ -3,7 +3,6 @@
 #### Run app on your system:
 
 - First load the data on your system
-- 
 - `pip3 install -r requirements.txt`
 - `python3 app.py`
 
