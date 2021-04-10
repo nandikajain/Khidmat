@@ -1,5 +1,9 @@
-# Khidmat Database
-
+<p align = "center">
+<h1> 
+  Khidmat Database
+  <img src = "static/favicon.png" width = "5%" align = "left"> 
+</h1>
+</p>
 
 
 <p align ="center">
