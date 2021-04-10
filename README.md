@@ -3,7 +3,7 @@
 
 
 <p align ="center">
-    <img src="loginScreen.png" width="75%">
+    <img src="loginScreen.png" width="90%">
 </p>
 
 
