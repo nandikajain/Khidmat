@@ -1,14 +1,16 @@
 <p align = "center">
 <h1> 
   Khidmat Database
-  <img src = "static/favicon.png" width = "5%" align = "left"> 
+  <img src = "static/favicon.png" width = "8%" align = "left"> 
 </h1>
 </p>
 
 
+
 <p align ="center">
-    <img src="loginScreen.png" width="90%">
+    <img src="static/loginScreen.png" width="90%">
 </p>
+
 
 
 
