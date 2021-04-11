@@ -10,7 +10,7 @@ Khidmat
 				<img src="{{url_for('static', filename='customer.png')}}" width="80%" >
 			</div>
 			<div class="col-md-6 col-12 m-auto">
-				<h1 style="color:#00b1ff">Welcome Customer !!</h1>
+				<h1 style="color:#00b1ff">Welcome Customer!!</h1>
 				<p style="font-size: 19px;">
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed imperdiet facilisis ex sit amet lobortis. Mauris sed mi tortor. Sed laoreet risus et mauris pharetra, eu ultricies ex sollicitudin. Nulla
 				</p>
@@ -22,10 +22,15 @@ Khidmat
 	</div>
   </div>
 <br>
-<div class="row row-cols-1 row-cols-md-4 g-4">
+<h2 style="text-align: center;color:#91612F; text-decoration: underline;" class="mt-3">Restaurants near you</h2>
+<form class="d-flex w-25 m-auto pt-2" >
+	<input class="form-control me-2" type="search" placeholder="Search Restaurants" aria-label="Search" disabled>
+	<button class="btn btn-success" type="submit" disabled>Search</button>
+  </form>
+<div class="row m-0 p-4  mt-4">
 {% for i in x %}
-<div class = "col">
-	<div class="card" style="width: 18rem;">
+<div class = "col-md-4 col-12 m-auto">
+	<div class="card mb-3 h-100" >
 	  <div class="card-body">
 	    <h5 class="card-title">{{i[0]}}</h5>
 	    <h6 class="card-subtitle mb-2 text-muted">{{i[2]}}</h6>
