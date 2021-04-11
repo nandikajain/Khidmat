@@ -100,7 +100,34 @@ def login():
 @app.route("/customer", methods= ["POST", "GET"])
 def customer():
     if "user" in session:
-        return render_template("customer.html")
+        mycursor = mydb.cursor()
+        mycursor.execute("Select r.name, r.description, r.city, r.type, a.av from Restaurant r, (Select restaurantID, avg(ratings) as av from Rates group by restaurantID)a where a.restaurantID = r.restaurantID;")
+        myresult = mycursor.fetchall()
+        return render_template("customer.html", x = myresult)
+    else:
+        return redirect(url_for("login"))
+    
+
+@app.route("/customer/profile")
+def custprof():
+    if "user" in session:
+        user = session["user"][0]
+        mycursor = mydb.cursor()
+        mycursor.execute(f"Select * from Customer where phone = '{user}'")
+        myresult = mycursor.fetchall()
+        return render_template("customerProfile.html", x = myresult)
+    else:
+        return redirect(url_for("login"))
+
+
+@app.route("/customer/orders")
+def pastorders():
+    if "user" in session:
+        user = session["user"][0]
+        mycursor = mydb.cursor()
+        mycursor.execute(f"Select o.orderID, o.customerID, o.restaurantID, o.billAmt, o.tip, o.status, o.dateTime, o.paymentMode, r.name from Orders o, Restaurant r where o.restaurantID = r.restaurantID and customerID = '{user}'")
+        myresult = mycursor.fetchall()
+        return render_template("customerOrders.html", x = myresult)
     else:
         return redirect(url_for("login"))
 
