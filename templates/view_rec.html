@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}
+Khidmat
+{% endblock %}
+{% block content %}
+<br>
+<div class="row row-cols-1 row-cols-md-4 g-4">
+{% for i in x %}
+<div class = "col">
+	<div class="card" style="width: 18rem;">
+	  <div class="card-body">
+	    <h5 class="card-title">{{i[2]}}</h5>
+	    <h6 class="card-subtitle mb-2 text-muted">{{i[1]}}, {{i[6]}}</h6>
+	    <p class="card-text">Accepts {{i[9]}}</p>
+	    <button type="button" class="btn btn-outline-primary">Make a Donation</button>
+	  </div>
+	</div>
+</div>
+{% endfor %}
+</div>
+{% endblock %}
