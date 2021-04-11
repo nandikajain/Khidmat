@@ -94,7 +94,7 @@ def login():
                 if(temp == password):
                     session.permanent = True
                     session["user"] = myresult[0]
-                    return  redirect(url_for("receiever"))
+                    return  redirect(url_for("receiver"))
             return  redirect(url_for("login"))
 
         else:
@@ -190,9 +190,25 @@ def restaurant():
 @app.route("/receiver", methods= ["POST", "GET"])
 def receiver():
     if "user" in session:
-        return render_template("receiver.html")
+        user = session["user"][0]
+        mycursor = mydb.cursor()
+        mycursor.execute(f"Select d.donationID, d.deliveryWorkerID, d.dateTime, d.category, d.status, d.quantity, r.name from Donor r, Donation d where d.donorID = r.donorID and receiverID = '{user}'")
+        myresult = mycursor.fetchall()
+        return render_template("receiver.html", x= myresult)
     else:
         return redirect(url_for("login"))
+
+@app.route("/receiver/profile")
+def receiver_prof():
+    if "user" in session:
+        user = session["user"][0]
+        mycursor = mydb.cursor()
+        mycursor.execute(f"Select * from Receiver where receiverID = '{user}'")
+        myresult = mycursor.fetchall()
+        return render_template("receiverProfile.html", x = myresult)
+    else:
+        return redirect(url_for("login"))
+
 
 @app.route("/logout")
 def logout():
