@@ -28,6 +28,9 @@ def login():
                 if(temp == password):
                     session.permanent = True
                     session["user"] = myresult[0]
+                    temp = session["user"]
+                    print(temp)
+                    print(temp[0])
                     return redirect(url_for("customer"))
             return  redirect(url_for("login"))
                 
