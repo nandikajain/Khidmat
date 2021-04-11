@@ -1,0 +1,41 @@
+{% extends "managementNavbar.html" %}
+{% block title %}
+Profile
+{% endblock %}
+{% block content %}
+<div class="bd-cheatsheet container-fluid bg-body">
+{% for i in x %}
+<h2>{{i[1]}} {{i[2]}}</h2>
+<h3>{{i[11]}}</h3>
+
+
+<h3>Details</h3>
+<p>ID: {{i[0]}} </p>
+<p>Phone: {{i[3]}}</p>
+<p>Salary: {{i[4]}}</p>
+<p>Date of Birth: {{i[12]}}</p>
+<h3>Address:</h3>
+<p> {{i[5]}}, {{i[6]}}, {{i[7]}}</p>
+<p> {{i[8]}}, {{i[9]}}</p>
+<p> {{i[10]}}</p>
+
+{% endfor %}
+</div>
+{% endblock %}
+
+Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| employeeID  | varchar(8)  | NO   | PRI | NULL    |       |
+| fName       | varchar(20) | NO   |     | NULL    |       |
+| lName       | varchar(20) | NO   |     | NULL    |       |
+| phone       | char(10)    | NO   | UNI | NULL    |       |
+| salary      | int         | NO   |     | NULL    |       |
+| hNo         | varchar(6)  | NO   |     | NULL    |       |
+| street      | varchar(20) | YES  |     | NULL    |       |
+| area        | varchar(20) | NO   |     | NULL    |       |
+| city        | varchar(20) | NO   |     | NULL    |       |
+| state       | varchar(20) | NO   |     | NULL    |       |
+| pin         | char(6)     | NO   |     | NULL    |       |
+| designation | varchar(50) | NO   |     | NULL    |       |
+| dob         | date        | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+--

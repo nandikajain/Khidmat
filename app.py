@@ -141,12 +141,47 @@ def management():
     else:
         return redirect(url_for("login"))
 
+
+@app.route("/management/profile")
+def management_prof():
+    if "user" in session:
+        user = session["user"][0]
+        mycursor = mydb.cursor()
+        mycursor.execute(f"Select * from Management where employeeID = '{user}'")
+        myresult = mycursor.fetchall()
+        return render_template("managementProfile.html", x = myresult)
+    else:
+        return redirect(url_for("login"))
+
 @app.route("/delivery", methods= ["POST", "GET"])
 def delivery():
     if "user" in session:
         return render_template("delivery.html")
     else:
         return redirect(url_for("login"))
+    
+
+# @app.route("/delivery/profile")
+# def delivery_profile():
+# 	user = 'E250818'
+# 	mycursor = mydb.cursor()
+# 	mycursor.execute(f"Select * from DeliveryWorker where employeeID = '{user}'")
+# 	myresult = mycursor.fetchall()
+# 	return render_template("delivery_profile.html", x = myresult)
+
+# @app.route("/delivery/")
+# def deliveries():
+# 	user = 'E250898'
+# 	mycursor = mydb.cursor()
+# 	mycursor.execute(f"Select o.OrderID, r.name, r.street, r.city, r.state, r.pin, c.phone, c.hNo, c.street, c.area, c.city, c.pin, o.paymentMode, o.billAmt from Orders o, Restaurant r, Customer c where c.phone = o.customerID and r.restaurantID = o.restaurantID and o.deliveryWorkerID = '{user}'")
+# 	myresult = mycursor.fetchall()
+# 	mycursor.execute(f"Select d.donationID, do.phone, do.hNo, do.area, do.city, do.state, do.pin, r.name, r.street, r.area, r.city, r.state, r.pin from Donation d, Donor do, Receiver r where r.receiverID = d.receiverID and d.donorID = do.donorID and d.deliveryWorkerID = '{user}'")
+# 	myresult2 = mycursor.fetchall()
+# 	return render_template("deliveries.html", x = myresult, y = myresult2)
+
+
+
+
         
 @app.route("/donor", methods= ["POST", "GET"])
 def donor():
