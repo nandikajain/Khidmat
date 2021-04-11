@@ -149,7 +149,8 @@ def logout():
 @app.route("/place", methods= ["POST", "GET"])
 def place():
     if request.method == "POST":
-        user = request.form.get("customer")
+        user = session.get("user")[0]
+        payment_mode = request.form.get("payment_mode")
         food1 = request.form.get("food1")
         food2 = request.form.get("food2")
         food3 = request.form.get("food3")
@@ -266,7 +267,6 @@ def place():
         dt = datetime.now()
         dt = dt.strftime("%Y-%m-%d %H-%M-%S")
 
-        payment_mode = "COD"
         discount_value = str(randint(1,30))
 
         # generate all relevant data related to the order
