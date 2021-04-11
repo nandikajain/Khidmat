@@ -3,21 +3,26 @@
 Profile
 {% endblock %}
 {% block content %}
+<div class="card m-auto mt-5 p-2 mb-5" style="width:70%;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+
 <div class="bd-cheatsheet container-fluid bg-body">
 {% for i in x %}
-<h2>{{i[1]}} {{i[2]}}</h2>
-<p>Salary: {{i[4]}}</p>
-<p>Tips: {{i[13]}}</p>
-<p>Fuel Amount: {{i[15]}}</p>
-<br>
-<h3>Details</h3>
-<p>ID: {{i[0]}} </p>
-<p>Phone: {{i[3]}}</p>
-<h3>Address:</h3>
-<p> {{i[6]}}, {{i[7]}}, {{i[8]}}</p>
-<p> {{i[9]}}, {{i[10]}}</p>
-<p> {{i[11]}}</p>
+<h2 style="color:#00b1ff"><img src="https://picsum.photos/60" style="border-radius: 30px;" class="me-3"><span>{{i[1]}} {{i[2]}}</span></h2>
+<hr>
+<p class="m-0"><span style="text-decoration: underline;">Salary:</span> ₹{{i[4]}}</p>
+<p class="m-0"> <span style="text-decoration: underline;">Tips:</span> {{i[13]}}</p>
+<p class="m-0"> <span style="text-decoration: underline;">Fuel Amount:</span> ₹{{i[15]}}</p>
+<hr>
+<h3  style="text-decoration: underline;">Details</h3>
+<p class="m-0"> <span style="text-decoration: underline;">ID:</span> {{i[0]}} </p>
+<p class="m-0"> <span style="text-decoration: underline;">Phone:</span>  {{i[3]}}</p>
+<hr>
+<h3  style="text-decoration: underline;">Address:</h3>
+<p class="m-0"> {{i[6]}}, {{i[7]}}, {{i[8]}}</p>
+<p class="m-0"> {{i[9]}}, {{i[10]}}</p>
+<p class="m-0"> {{i[11]}}</p>
 
 {% endfor %}
+</div>
 </div>
 {% endblock %}
