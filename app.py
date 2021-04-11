@@ -1,7 +1,10 @@
 from flask import Flask, redirect, url_for, render_template, request, session
-from datetime import timedelta
+from datetime import timedelta, datetime
+from random import randint
+
 import mysql.connector
-mydb=mysql.connector.connect(host="localhost",user="nandikajain",passwd="3827", database="khidmatDB" )
+
+mydb=mysql.connector.connect(host="localhost",user="root",passwd="root", database="khidmatDB" )
 app = Flask (__name__)
 app.permanent_session_lifetime = timedelta(days = 1)
 app.secret_key = "khidmatDB"
@@ -140,6 +143,234 @@ def receiver():
 def logout():
     session.pop("user", None)
     return redirect(url_for("login"))
-    
+
+
+
+@app.route("/place", methods= ["POST", "GET"])
+def place():
+    if request.method == "POST":
+        user = request.form.get("customer")
+        food1 = request.form.get("food1")
+        food2 = request.form.get("food2")
+        food3 = request.form.get("food3")
+
+        quantity1 = request.form.get("quantity1")
+        quantity2 = request.form.get("quantity2")
+        quantity3 = request.form.get("quantity3")
+
+
+        if (food1 != "" and quantity1 == ""):
+            print("quantity1 empty")
+            return redirect(url_for("place"))
+        
+        if (food2 != "" and quantity2 == ""):
+            print("quantity2 empty")
+            return redirect(url_for("place"))
+
+        if (food3 != "" and quantity3 == ""):
+            print("quantity3  empty")
+            return redirect(url_for("place"))
+
+        # check if form details are correct
+        flag = False
+        q=f"SELECT * FROM Customer WHERE phone='{user}';"
+        print(q)
+        mycursor.execute(q)
+        res = mycursor.fetchall()
+        # print(res)
+        if(len(res) != 1):
+            flag = True
+
+        q=f"SELECT itemID FROM food;"
+        print(q)
+        mycursor.execute(q)
+        res = mycursor.fetchall()
+        if (food1 != "" and (food1,) not in res):
+            flag = True
+        if (food2 != "" and (food2,) not in res):
+            print("food2: ",food2)
+            flag = True
+        if (food3 != "" and (food3,) not in res):
+            print("food3: ",food3)
+            flag = True
+
+        if(flag):
+            print("Invalid details")
+            return  redirect(url_for("place"))
+
+        # find the next order number
+        q=f"SELECT orderID FROM orders;"
+        # print(q)
+        mycursor.execute(q)
+        res = mycursor.fetchall()
+        # print(res)
+        mx = 0
+        for i in res:
+            if(int(i[0][1:]) > mx):
+                mx = int(i[0][1:])
+
+        next_order = 'O'+str(mx+1)
+
+        #check if all food are from same restaurant, else give error
+        q=f"SELECT itemID, restaurantID, price FROM food;"
+        print(q)
+        mycursor.execute(q)
+        res = mycursor.fetchall()
+        
+        restaurant_name1 = ''
+        restaurant_name2 = ''
+        restaurant_name3 = ''
+
+        bill_amount = 0
+
+        for i in res:
+            if (food1 != "" and food1 in i):
+                restaurant_name1 = i[1]
+                bill_amount += i[2]
+            if (food2 != "" and food2 in i):
+                restaurant_name2 = i[1]
+                bill_amount += i[2]
+            if (food3 != "" and food3 in i):
+                restaurant_name3 = i[1]
+                bill_amount += i[2]
+
+
+
+        if(food1 != "" and food2 != "" and food1 == food2):
+            print("Same food names for 1 and 2,",food1)
+            return redirect(url_for("place"))
+
+        if(food2 != "" and food3 != "" and food2 == food3):
+            print("Same food names for 2 and 3,",food2)
+            return redirect(url_for("place"))
+
+        if(food1 != "" and food3 != "" and food1 == food3):
+            print("Same food names for 1 and 3,",food1)
+            return redirect(url_for("place"))
+
+
+
+        if(food1 != "" and food2 != "" and restaurant_name1 != restaurant_name2):
+            print("Restaurant names don't match for 1 and 2")
+            return redirect(url_for("place"))
+
+        if(food1 != "" and food3 != "" and restaurant_name1 != restaurant_name3):
+            print("Restaurant names don't match for 1 and 3")
+            return redirect(url_for("place"))
+
+        if(food2 != "" and food3 != "" and restaurant_name2 != restaurant_name3):
+            print("Restaurant names don't match for 2 and 3")
+            return redirect(url_for("place"))
+
+
+        dt = datetime.now()
+        dt = dt.strftime("%Y-%m-%d %H-%M-%S")
+
+        payment_mode = "COD"
+        discount_value = str(randint(1,30))
+
+        # generate all relevant data related to the order
+        q=f"INSERT INTO orders(orderID, status, dateTime, billAmt, paymentMode, customerID, restaurantID, deliveryWorkerID, discount, tip) VALUES('{next_order}', 'Active', '{dt}', {str(bill_amount)}, '{payment_mode}', '{user}', '{restaurant_name1}', 'E250{800+2*randint(0,49)}', {discount_value}, 0);"
+        print(q)
+        mycursor.execute(q)
+        myresult = mycursor.fetchall()
+        mydb.commit()
+        print(myresult)
+
+        if(food1 != ""):
+            q=f"INSERT INTO contains(foodID, orderID, quantity) VALUES('{food1}', '{next_order}', {quantity1});"
+            print(q)
+            mycursor.execute(q)
+            myresult = mycursor.fetchall()
+            mydb.commit()
+            print(myresult)
+        if(food2 != ""):
+            q=f"INSERT INTO contains(foodID, orderID, quantity) VALUES('{food2}', '{next_order}', {quantity2});"
+            print(q)
+            mycursor.execute(q)
+            myresult = mycursor.fetchall()
+            mydb.commit()
+            print(myresult)
+        if(food3 != ""):
+            q=f"INSERT INTO contains(foodID, orderID, quantity) VALUES('{food3}', '{next_order}', {quantity3});"
+            print(q)
+            mycursor.execute(q)
+            myresult = mycursor.fetchall()
+            mydb.commit()
+            print(myresult)
+
+
+        # Add relevant order details to `prepares`, `places`, `delivers` tables
+        # But these table doesn't exist yet.
+
+
+    else:
+        print("The User logged in is: ",session.get("user"))
+
+    return render_template("place.html")
+
+
+
+@app.route("/make", methods= ["POST", "GET"])
+def make():
+    if request.method == "POST":
+        donorID = session.get("user")[0]
+        
+        category = request.form.get("category")
+        quantity = request.form.get("quantity")
+        
+        try:
+            if(int(quantity) <= 0):
+                print("Cannot make donation with quantity:",quantity)
+        except:
+            print("Wrong Quantity Input Format")
+            return redirect(url_for("make"))
+
+
+        # get next DonationID
+        q = f"SELECT donationID FROM donation;"
+        # print(q)
+        mycursor.execute(q)
+        res = mycursor.fetchall()
+        # print(res)
+        mx = 0
+        for i in res:
+            if(int(i[0][2:]) > mx):
+                mx = int(i[0][2:])
+
+        donationID = "DO"+str(mx+1)
+
+        dt = datetime.now()
+        dt = dt.strftime("%Y-%m-%d %H-%M-%S")
+
+        q = f"INSERT INTO donation(donationID, donorID, receiverID, deliveryWorkerID, dateTime, category, status, quantity) VALUES('{donationID}', '{donorID}', NULL, 'E250{800+2*randint(0,49)}', '{dt}', '{category}', 'active', {quantity});"
+        print(q)
+        mycursor.execute(q)
+        myresult = mycursor.fetchall()
+        mydb.commit()
+        print(myresult)
+
+        q = f"SELECT points FROM donor WHERE donorID = '{donorID}';"
+        print(q)
+        mycursor.execute(q)
+        res = mycursor.fetchall()
+
+        new_points = str((int(res[0][0]))+randint(10,50));
+
+        q = f"UPDATE donor SET points = {new_points};"
+        print(q)
+        mycursor.execute(q)
+        res = mycursor.fetchall()
+        mydb.commit()
+
+
+        # Add relevant order details to `donates` table
+        # But this table doesn't exist yet.
+
+    else:
+        print("The Donor logged in is: ",session.get("user"))
+    return render_template("make.html")
+
+
 if __name__ == "__main__":
     app.run(debug=True)
