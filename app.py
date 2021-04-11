@@ -21,10 +21,8 @@ def login():
         q=""
         if(typeOf == "Customer"):
             q=f"SELECT * FROM Customer WHERE phone='{username}';"
-            print(q)
             mycursor.execute(q)
             myresult = mycursor.fetchall()
-            print(myresult)
             if (len(myresult)==1):
                 temp = typeOf[0]+username
                 if(temp == password):
@@ -35,10 +33,8 @@ def login():
                 
         elif(typeOf=="Restaurant"):
             q=f"SELECT * FROM Restaurant WHERE restaurantID='{username}';"
-            print(q)
             mycursor.execute(q)
             myresult = mycursor.fetchall()
-            print(myresult)
             if (len(myresult)==1):
                 temp = typeOf[0]+username
                 if(temp == password):
@@ -49,10 +45,8 @@ def login():
                 
         elif(typeOf=="Management"):
             q=f"SELECT * FROM Management WHERE employeeID='{username}';"
-            print(q)
             mycursor.execute(q)
             myresult = mycursor.fetchall()
-            print(myresult)
             if (len(myresult)==1):
                 temp = typeOf[0]+username
                 if(temp == password):
@@ -63,10 +57,8 @@ def login():
 
         elif(typeOf == "DeliveryWorker"):
             q=f"SELECT * FROM DeliveryWorker WHERE employeeID='{username}';"
-            print(q)
             mycursor.execute(q)
             myresult = mycursor.fetchall()
-            print(myresult)
             if (len(myresult)==1):
                 temp = typeOf[0]+username
                 if(temp == password):
@@ -77,10 +69,8 @@ def login():
 
         elif(typeOf == "Donor"):
             q=f"SELECT * FROM Donor WHERE donorID ='{username}';"
-            print(q)
             mycursor.execute(q)
             myresult = mycursor.fetchall()
-            print(myresult)
             if (len(myresult)==1):
                 temp = typeOf[0]+username
                 if(temp == password):
@@ -91,10 +81,8 @@ def login():
 
         elif(typeOf == "Receiver"):
             q=f"SELECT * FROM Receiver WHERE receiverID='{username}';"
-            print(q)
             mycursor.execute(q)
             myresult = mycursor.fetchall()
-            print(myresult)
             if (len(myresult)==1):
                 temp = typeOf[0]+username
                 if(temp == password):
@@ -108,27 +96,45 @@ def login():
         
 @app.route("/customer", methods= ["POST", "GET"])
 def customer():
-    return render_template("customer.html")
+    if "user" in session:
+        return render_template("customer.html")
+    else:
+        return redirect(url_for("login"))
 
 @app.route("/management", methods= ["POST", "GET"])
 def management():
-    return render_template("management.html")
+    if "user" in session:
+        return render_template("management.html")
+    else:
+        return redirect(url_for("login"))
 
 @app.route("/delivery", methods= ["POST", "GET"])
 def delivery():
-    return render_template("delivery.html")
-
+    if "user" in session:
+        return render_template("delivery.html")
+    else:
+        return redirect(url_for("login"))
+        
 @app.route("/donor", methods= ["POST", "GET"])
 def donor():
-    return render_template("donor.html")
+    if "user" in session:
+        return render_template("donor.html")
+    else:
+        return redirect(url_for("login"))
 
 @app.route("/restaurant", methods= ["POST", "GET"])
 def restaurant():
-    return render_template("restaurant.html")
+    if "user" in session:
+        return render_template("restaurant.html")
+    else:
+        return redirect(url_for("login"))
 
 @app.route("/receiver", methods= ["POST", "GET"])
 def receiver():
-    return render_template("receiver.html")
+    if "user" in session:
+        return render_template("receiver.html")
+    else:
+        return redirect(url_for("login"))
 
 @app.route("/logout")
 def logout():
