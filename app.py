@@ -4,7 +4,7 @@ from random import randint
 
 import mysql.connector
 
-mydb=mysql.connector.connect(host="localhost",user="root",passwd="root", database="khidmatDB" )
+mydb=mysql.connector.connect(host="localhost",user="nandikajain",passwd="3827", database="khidmatDB" )
 app = Flask (__name__)
 app.permanent_session_lifetime = timedelta(days = 1)
 app.secret_key = "khidmatDB"
@@ -151,7 +151,32 @@ def delivery():
 @app.route("/donor", methods= ["POST", "GET"])
 def donor():
     if "user" in session:
-        return render_template("donor.html")
+        mycursor = mydb.cursor()
+        mycursor.execute("Select * from Receiver;")
+        myresult = mycursor.fetchall()
+        return render_template("donor.html", x= myresult)
+    else:
+        return redirect(url_for("login"))
+
+@app.route("/donor/profile")
+def donor_prof():
+    if "user" in session:
+        user = session["user"][0]
+        mycursor = mydb.cursor()
+        mycursor.execute(f"Select * from Donor where donorID = '{user}'")
+        myresult = mycursor.fetchall()
+        return render_template("donorProfile.html", x = myresult)
+    else:
+        return redirect(url_for("login"))
+
+@app.route("/donor/donations")
+def donor_donations():
+    if "user" in session:
+        user = session["user"][0]
+        mycursor = mydb.cursor()
+        mycursor.execute(f"Select d.donationID, d.deliveryWorkerID, d.dateTime, d.category, d.status, d.quantity, r.name from Receiver r, Donation d where d.receiverID = r.receiverID and donorID = '{user}'")
+        myresult = mycursor.fetchall()
+        return render_template("donorDonations.html", x = myresult)
     else:
         return redirect(url_for("login"))
 
