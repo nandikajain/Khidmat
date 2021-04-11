@@ -15,7 +15,7 @@ configobj==5.0.6
 configparser==5.0.1
 constantly==15.1.0
 crayons==0.4.0
-cryptography==2.8
+cryptography==3.3.2
 cycler==0.10.0
 dbus-python==1.2.16
 decorator==4.4.2
