@@ -1,0 +1,23 @@
+{% extends "deliveryNavbar.html" %}
+{% block title %}
+Profile
+{% endblock %}
+{% block content %}
+<div class="bd-cheatsheet container-fluid bg-body">
+{% for i in x %}
+<h2>{{i[1]}} {{i[2]}}</h2>
+<p>Salary: {{i[4]}}</p>
+<p>Tips: {{i[13]}}</p>
+<p>Fuel Amount: {{i[15]}}</p>
+<br>
+<h3>Details</h3>
+<p>ID: {{i[0]}} </p>
+<p>Phone: {{i[3]}}</p>
+<h3>Address:</h3>
+<p> {{i[6]}}, {{i[7]}}, {{i[8]}}</p>
+<p> {{i[9]}}, {{i[10]}}</p>
+<p> {{i[11]}}</p>
+
+{% endfor %}
+</div>
+{% endblock %}
