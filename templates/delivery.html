@@ -29,15 +29,15 @@ Orders
   </form>
 <div class="row m-0 p-4  mt-4">
 {% for i in x %}
-<div class = "col-md-4 col-12 m-auto p-1">
-	<div class="card h-100" >
+<div class = "col-md-4 col-12 p-3">
+	<div class="card h-100 m-auto " >
 	  <div class="card-body">
 	    <h5 class="card-title">{{i[0]}}</h5>    
-	    <p class="card-text">PickUp: {{i[1]}}</p>
-	    <p>{{i[3]}},{{i[4]}} {{i[5]}}</p>
-	    <p class="card-text">Drop: {{i[6]}}</p>
+	    <p class="card-text m-0">PickUp: {{i[1]}}</p>
+	    <p class="m-0">{{i[3]}},{{i[4]}} {{i[5]}}</p>
+	    <p class="card-text m-0">Drop: {{i[6]}}</p>
 	    <p>{{i[7]}},{{i[8]}} {{i[9]}} {{i[10]}}</p>
-	    <p class="card-text">Payment Mode: {{i[12]}} </p><p>Bill Amount: {{i[13]}}</p>
+	    <p class="card-text">Payment Mode: {{i[12]}} </p><p>Bill Amount: ₹{{i[13]}}</p>
 	    <button type="button" class="btn btn-outline-primary" href = '#'>View Summary</button>
 	  </div>
 	</div>
