@@ -177,13 +177,13 @@ def management_prof_edit():
             if(hNo != "" and street != "" and area != "" and city != "" and state != "" and pin != ""):
                 # The user wants to change the address
                 if(phone_no != ""):
-                    q = f"UPDATE management SET hNo = '{hNo}', street = '{street}', area = '{area}', city = '{city}', state = '{state}', pin = '{pin}', phone = '{phone_no}' WHERE employeeID = '{user}';"
+                    q = f"UPDATE Management SET hNo = '{hNo}', street = '{street}', area = '{area}', city = '{city}', state = '{state}', pin = '{pin}', phone = '{phone_no}' WHERE employeeID = '{user}';"
                     print(q)
                     mycursor.execute(q)
                     res = mycursor.fetchall()
                     mydb.commit()
                 else:
-                    q = f"UPDATE management SET hNo = '{hNo}', street = '{street}', area = '{area}', city = '{city}', state = '{state}', pin = '{pin}' WHERE employeeID = '{user}';"
+                    q = f"UPDATE Management SET hNo = '{hNo}', street = '{street}', area = '{area}', city = '{city}', state = '{state}', pin = '{pin}' WHERE employeeID = '{user}';"
                     print(q)
                     mycursor.execute(q)
                     res = mycursor.fetchall()
@@ -192,7 +192,7 @@ def management_prof_edit():
             elif(hNo == "" and street == "" and area == "" and city == "" and state == "" and pin == ""):
                 # The user doesn't want to change address
                 if(phone_no != ""):
-                    q = f"UPDATE management SET phone = '{phone_no}' WHERE employeeID = '{user}';"
+                    q = f"UPDATE Management SET phone = '{phone_no}' WHERE employeeID = '{user}';"
                     print(q)
                     mycursor.execute(q)
                     res = mycursor.fetchall()
@@ -237,7 +237,7 @@ def delivery_profile():
 def delivery_prof_edit():
     if "user" in session:
         user = session["user"][0]
-        q = f"SELECT * FROM deliveryworker WHERE employeeID = '{user}'"
+        q = f"SELECT * FROM DeliveryWorker WHERE employeeID = '{user}'"
         mycursor.execute(q)
         myresult = mycursor.fetchall()
 
@@ -269,7 +269,7 @@ def delivery_prof_edit():
             if(request.form.get("pin") != ""):
                 pin = request.form.get("pin")
 
-            q = f"UPDATE deliveryworker SET phone = '{phone}', tips = {tip}, hNo = {hNo}, street = '{street}', area = '{area}', city = '{city}', state = '{state}', pin = '{pin}' WHERE employeeID = '{user}';"
+            q = f"UPDATE DeliveryWorker SET phone = '{phone}', tips = {tip}, hNo = {hNo}, street = '{street}', area = '{area}', city = '{city}', state = '{state}', pin = '{pin}' WHERE employeeID = '{user}';"
             print(q)
             mycursor.execute(q)
             res = mycursor.fetchall()
@@ -319,7 +319,7 @@ def donor_donations():
 def restaurant():
     if "user" in session:
         restaurantID = session.get("user")[0]
-        q = f"SELECT name, price, discount, category, isVeg FROM food WHERE restaurantID = '{restaurantID}';"
+        q = f"SELECT name, price, discount, category, isVeg FROM Food WHERE restaurantID = '{restaurantID}';"
         mycursor.execute(q)
         myresult = mycursor.fetchall()
         myresult.append(session.get("user")[3])
@@ -344,7 +344,7 @@ def restaurant_prof():
 def restaurant_prof_edit():
     if "user" in session:
         user = session["user"][0]
-        q = f"SELECT * FROM restaurant WHERE restaurantID = '{user}'"
+        q = f"SELECT * FROM Restaurant WHERE restaurantID = '{user}'"
         mycursor.execute(q)
         myresult = mycursor.fetchall()
         if request.method == "POST":
@@ -385,9 +385,9 @@ def restaurant_prof_edit():
                 pin = request.form.get("pin")
 
             if(str.lower(dinein) == "yes"):
-                q = f"UPDATE restaurant SET isDineIn = 1, phone = '{phone}', description = '{description}', name = '{name}', street = '{street}', area = '{area}', city = '{city}', state = '{state}', pin = '{pin}' WHERE restaurantID = '{user}';"
+                q = f"UPDATE Restaurant SET isDineIn = 1, phone = '{phone}', description = '{description}', name = '{name}', street = '{street}', area = '{area}', city = '{city}', state = '{state}', pin = '{pin}' WHERE restaurantID = '{user}';"
             else:
-                q = f"UPDATE restaurant SET isDineIn = 0, phone = '{phone}', description = '{description}', name = '{name}', street = '{street}', area = '{area}', city = '{city}', state = '{state}', pin = '{pin}' WHERE restaurantID = '{user}';"
+                q = f"UPDATE Restaurant SET isDineIn = 0, phone = '{phone}', description = '{description}', name = '{name}', street = '{street}', area = '{area}', city = '{city}', state = '{state}', pin = '{pin}' WHERE restaurantID = '{user}';"
             print(q)
             mycursor.execute(q)
             res = mycursor.fetchall()
@@ -481,7 +481,7 @@ def place():
                 return  redirect(url_for("place"))
 
             # find the next order number
-            q=f"SELECT orderID FROM orders;"
+            q=f"SELECT orderID FROM Orders;"
             mycursor.execute(q)
             res = mycursor.fetchall()
             mx = 0
@@ -531,7 +531,7 @@ def place():
             discount_value = str(randint(1,30))
 
             # generate all relevant data related to the order
-            q=f"INSERT INTO orders(orderID, status, dateTime, billAmt, paymentMode, customerID, restaurantID, deliveryWorkerID, discount, tip) VALUES('{next_order}', 'Active', '{dt}', {str(bill_amount)}, '{payment_mode}', '{user}', '{restaurant_name1}', 'E250{800+2*randint(0,49)}', {discount_value}, 0);"
+            q=f"INSERT INTO Orders(orderID, status, dateTime, billAmt, paymentMode, customerID, restaurantID, deliveryWorkerID, discount, tip) VALUES('{next_order}', 'Active', '{dt}', {str(bill_amount)}, '{payment_mode}', '{user}', '{restaurant_name1}', 'E250{800+2*randint(0,49)}', {discount_value}, 0);"
             print(q)
             mycursor.execute(q)
             myresult = mycursor.fetchall()
@@ -583,7 +583,7 @@ def make():
                 print("Wrong Quantity Input Format")
                 return redirect(url_for("make"))
 
-            q = f"SELECT donationID FROM donation;"
+            q = f"SELECT donationID FROM Donation;"
             # print(q)
             mycursor.execute(q)
             res = mycursor.fetchall()
@@ -598,19 +598,19 @@ def make():
             dt = datetime.now()
             dt = dt.strftime("%Y-%m-%d %H-%M-%S")
 
-            q = f"INSERT INTO donation(donationID, donorID, receiverID, deliveryWorkerID, dateTime, category, status, quantity) VALUES('{donationID}', '{donorID}', NULL, 'E250{800+2*randint(0,49)}', '{dt}', '{category}', 'active', {quantity});"
+            q = f"INSERT INTO Donation(donationID, donorID, receiverID, deliveryWorkerID, dateTime, category, status, quantity) VALUES('{donationID}', '{donorID}', NULL, 'E250{800+2*randint(0,49)}', '{dt}', '{category}', 'active', {quantity});"
             print(q)
             mycursor.execute(q)
             myresult = mycursor.fetchall()
             mydb.commit()
             print(myresult)
 
-            q = f"SELECT points FROM donor WHERE donorID = '{donorID}';"
+            q = f"SELECT points FROM Donor WHERE donorID = '{donorID}';"
             print(q)
             mycursor.execute(q)
             res = mycursor.fetchall()
             new_points = str((int(res[0][0]))+randint(10,50))
-            q = f"UPDATE donor SET points = {new_points} WHERE donorID = '{donorID}';"
+            q = f"UPDATE Donor SET points = {new_points} WHERE donorID = '{donorID}';"
             print(q)
             mycursor.execute(q)
             res = mycursor.fetchall()
