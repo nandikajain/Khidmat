@@ -212,7 +212,12 @@ def donor_donations():
 @app.route("/restaurant", methods= ["POST", "GET"])
 def restaurant():
     if "user" in session:
-        return render_template("restaurant.html")
+        restaurantID = session.get("user")[0];
+        q = f"SELECT name, price, discount, category, isVeg FROM food WHERE restaurantID = '{restaurantID}';"
+        mycursor.execute(q)
+        myresult = mycursor.fetchall()
+        myresult.append(session.get("user")[3])
+        return render_template("restaurant.html", x = myresult)
     else:
         return redirect(url_for("login"))
 
