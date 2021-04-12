@@ -153,6 +153,56 @@ def management_prof():
     else:
         return redirect(url_for("login"))
 
+@app.route("/management/profile/edit", methods= ["POST", "GET"])
+def management_prof_edit():
+    user = session["user"][0]
+    q = f"SELECT * FROM Management WHERE employeeID = '{user}'"
+    print(q)
+    mycursor.execute(q)
+    myresult = mycursor.fetchall()
+    if request.method == "POST":
+        # read data
+        phone_no = request.form.get("phone_no")
+
+        hNo = request.form.get("hNo")
+        street = request.form.get("street")
+        area = request.form.get("area")
+        city = request.form.get("city")
+        state = request.form.get("state")
+        pin = request.form.get("pin")
+
+        if(hNo != "" and street != "" and area != "" and city != "" and state != "" and pin != ""):
+            # The user wants to change the address
+            if(phone_no != ""):
+                q = f"UPDATE management SET hNo = '{hNo}', street = '{street}', area = '{area}', city = '{city}', state = '{state}', pin = '{pin}', phone = '{phone_no}' WHERE employeeID = '{user}';"
+                print(q)
+                mycursor.execute(q)
+                res = mycursor.fetchall()
+                mydb.commit()
+            else:
+                q = f"UPDATE management SET hNo = '{hNo}', street = '{street}', area = '{area}', city = '{city}', state = '{state}', pin = '{pin}' WHERE employeeID = '{user}';"
+                print(q)
+                mycursor.execute(q)
+                res = mycursor.fetchall()
+                mydb.commit()
+
+        elif(hNo == "" and street == "" and area == "" and city == "" and state == "" and pin == ""):
+            # The user doesn't want to change address
+            if(phone_no != ""):
+                q = f"UPDATE management SET phone = '{phone_no}' WHERE employeeID = '{user}';"
+                print(q)
+                mycursor.execute(q)
+                res = mycursor.fetchall()
+                mydb.commit()
+        else:
+            print("All address details are not entered")
+        return redirect(url_for("management_prof_edit"))
+
+    else:
+        print("The management logged in is: ",session.get("user"))
+
+    return render_template("managementEditProfile.html", x = myresult)
+
 @app.route("/delivery", methods= ["POST", "GET"])
 def delivery():
     if "user" in session:
@@ -176,6 +226,56 @@ def delivery_profile():
         return render_template("deliveryProfile.html", x = myresult)
     else:
         return redirect(url_for("login"))
+
+@app.route("/delivery/profile/edit", methods= ["POST", "GET"])
+def delivery_prof_edit():
+    user = session["user"][0]
+    q = f"SELECT * FROM deliveryworker WHERE employeeID = '{user}'"
+    mycursor.execute(q)
+    myresult = mycursor.fetchall()
+    print(myresult)
+
+    if request.method == "POST":
+        # read data
+
+        phone = myresult[0][3]
+        tip = myresult[0][13]
+        hNo = myresult[0][6]
+        street = myresult[0][7]
+        city = myresult[0][8]
+        area = myresult[0][9]
+        state = myresult[0][10]
+        pin = myresult[0][11]
+
+        if(request.form.get("phone_no") != ""):
+            phone = request.form.get("phone_no")
+        if(request.form.get("tip") != ""):
+            tip = request.form.get("tip")
+
+        if(request.form.get("hNo") != ""):
+            hNo = request.form.get("hNo")
+        if(request.form.get("street") != ""):
+            street = request.form.get("street")
+        if(request.form.get("area") != ""):
+            area = request.form.get("area")
+        if(request.form.get("city") != ""):
+            city = request.form.get("city")
+        if(request.form.get("state") != ""):
+            state = request.form.get("state")
+        if(request.form.get("pin") != ""):
+            pin = request.form.get("pin")
+
+        q = f"UPDATE deliveryworker SET phone = '{phone}', tips = {tip}, hNo = {hNo}, street = '{street}', area = '{area}', city = '{city}', state = '{state}', pin = '{pin}' WHERE employeeID = '{user}';"
+        print(q)
+        mycursor.execute(q)
+        res = mycursor.fetchall()
+        mydb.commit()
+        
+        return redirect(url_for("delivery_prof_edit"))
+
+    else:
+        print("The delivery worker logged in is: ",session.get("user"))
+    return render_template("deliveryEditProfile.html", x = myresult)
 
 @app.route("/donor", methods= ["POST", "GET"])
 def donor():
@@ -220,6 +320,84 @@ def restaurant():
         return render_template("restaurant.html", x = myresult)
     else:
         return redirect(url_for("login"))
+
+@app.route("/restaurant/profile")
+def restaurant_prof():
+    if "user" in session:
+        user = session["user"][0]
+        q = f"SELECT * FROM restaurant WHERE restaurantID = '{user}'"
+        mycursor.execute(q)
+        myresult = mycursor.fetchall()
+        return render_template("restaurantProfile.html", x = myresult)
+    else:
+        return redirect(url_for("login"))
+
+@app.route("/restaurant/profile/edit", methods= ["POST", "GET"])
+def restaurant_prof_edit():
+    user = session["user"][0]
+    q = f"SELECT * FROM restaurant WHERE restaurantID = '{user}'"
+    mycursor.execute(q)
+    myresult = mycursor.fetchall()
+    print(myresult)
+
+    if request.method == "POST":
+        # read data
+
+        phone = myresult[0][5]
+        name = myresult[0][4]
+        description = myresult[0][3]
+        dinein = myresult[0][11]
+        if(dinein == 1):
+            dinein = "yes"
+        else:
+            dinein = "no"
+        street = myresult[0][6]
+        city = myresult[0][7]
+        area = myresult[0][8]
+        state = myresult[0][9]
+        pin = myresult[0][10]
+
+
+        if(request.form.get("phone_no") != ""):
+            phone_no = request.form.get("phone_no")
+        if(request.form.get("restaurant_name") != ""):
+            name = request.form.get("phone_no")
+
+        if(request.form.get("description") != ""):
+            description = request.form.get("description")
+
+        if(request.form.get("dinein1") != None):
+            dinein = request.form.get("dinein1")
+        if(request.form.get("dinein2") != None):
+            dinein = request.form.get("dinein2")
+
+        if(request.form.get("street") != ""):
+            street = request.form.get("street")
+        if(request.form.get("area") != ""):
+            area = request.form.get("area")
+        if(request.form.get("city") != ""):
+            city = request.form.get("city")
+        if(request.form.get("state") != ""):
+            state = request.form.get("state")
+        if(request.form.get("pin") != ""):
+            pin = request.form.get("pin")
+
+        if(str.lower(dinein) == "yes"):
+            q = f"UPDATE restaurant SET isDineIn = 1, phone = '{phone}', description = '{description}', name = '{name}', street = '{street}', area = '{area}', city = '{city}', state = '{state}', pin = '{pin}' WHERE restaurantID = '{user}';"
+        else:
+            q = f"UPDATE restaurant SET isDineIn = 0, phone = '{phone}', description = '{description}', name = '{name}', street = '{street}', area = '{area}', city = '{city}', state = '{state}', pin = '{pin}' WHERE restaurantID = '{user}';"
+        print(q)
+        mycursor.execute(q)
+        res = mycursor.fetchall()
+        mydb.commit()
+
+        
+        return redirect(url_for("restaurant_prof_edit"))
+
+    else:
+        print("The restaurant logged in is: ",session.get("user"))
+
+    return render_template("restaurantEditProfile.html", x = myresult)
 
 @app.route("/receiver", methods= ["POST", "GET"])
 def receiver():
@@ -461,7 +639,7 @@ def make():
 
         new_points = str((int(res[0][0]))+randint(10,50));
 
-        q = f"UPDATE donor SET points = {new_points};"
+        q = f"UPDATE donor SET points = {new_points} WHERE donorID = '{donorID}';"
         print(q)
         mycursor.execute(q)
         res = mycursor.fetchall()
