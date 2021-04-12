@@ -245,8 +245,8 @@ def logout():
     return redirect(url_for("login"))
 
 
-
-@app.route("/place", methods= ["POST", "GET"])
+# To place order by customer
+@app.route("/customer/place", methods= ["POST", "GET"])
 def place():
     if request.method == "POST":
         user = session.get("user")[0]
@@ -258,7 +258,6 @@ def place():
         quantity1 = request.form.get("quantity1")
         quantity2 = request.form.get("quantity2")
         quantity3 = request.form.get("quantity3")
-
 
         if (food1 != "" and quantity1 == ""):
             print("quantity1 empty")
@@ -327,13 +326,13 @@ def place():
         for i in res:
             if (food1 != "" and food1 in i):
                 restaurant_name1 = i[1]
-                bill_amount += i[2]
+                bill_amount += i[2] * int(quantity1)
             if (food2 != "" and food2 in i):
-                restaurant_name2 = i[1]
-                bill_amount += i[2]
+                restaurant_name2 = i[1] 
+                bill_amount += i[2] * int(quantity2)
             if (food3 != "" and food3 in i):
                 restaurant_name3 = i[1]
-                bill_amount += i[2]
+                bill_amount += i[2] * int(quantity3)
 
 
 
@@ -407,11 +406,11 @@ def place():
     else:
         print("The User logged in is: ",session.get("user"))
 
-    return render_template("place.html")
+    return render_template("customerPlace.html")
 
 
-
-@app.route("/make", methods= ["POST", "GET"])
+# To make a donation by donor
+@app.route("/donor/make", methods= ["POST", "GET"])
 def make():
     if request.method == "POST":
         donorID = session.get("user")[0]
@@ -469,7 +468,7 @@ def make():
 
     else:
         print("The Donor logged in is: ",session.get("user"))
-    return render_template("make.html")
+    return render_template("donorMake.html")
 
 
 if __name__ == "__main__":
