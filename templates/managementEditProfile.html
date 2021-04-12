@@ -1,0 +1,110 @@
+{% extends "managementNavbar.html" %}
+{% block title %}
+Profile
+{% endblock %}
+{% block content %}
+<div class="card m-auto mt-5 p-2 mb-5" style="width:70%;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+
+<div class="bd-cheatsheet container-fluid bg-body">
+{% for i in x %}
+	<form action='#' method="post">
+		<h2 style="color:#00b1ff"><img src="https://picsum.photos/60" style="border-radius: 30px;" class="me-3"><span>{{i[1]}} {{i[2]}}</span></h2>
+		<p style="text-transform: uppercase; font-weight: 500;font-size: 115%; color:#91612F;">{{i[11]}}</p>
+
+		<hr>
+
+		<h3 style="text-decoration: underline;">Details</h3>
+		<p class="m-0"><span style="text-decoration: underline;">ID:</span> {{i[0]}} </p>
+		<p class="m-0">
+			<span style="text-decoration: underline;">Phone:</span> {{i[3]}}
+			<button type="button" onclick="edit_phone_no();" class="btn btn-outline-primary">EDIT</button>
+			<input type="text" name="phone_no" id="phone_no" style="display: none;" />
+		</p>
+
+		<p class="m-0"><span style="text-decoration: underline;">Salary:</span> ₹{{i[4]}}</p>
+		<p class="m-0"><span style="text-decoration: underline;">Date of Birth:</span> {{i[12]}}</p>
+		<hr>
+		<h3 style="text-decoration: underline;">Address:</h3>
+		<p class="m-0"> {{i[5]}}, {{i[6]}}, {{i[7]}}</p>
+		<p class="m-0"> {{i[8]}}, {{i[9]}}</p>
+		<p 
+			class="m-0"> {{i[10]}}
+			<button type="button" onclick= "edit_address();" class="btn btn-outline-primary">EDIT</button>
+		</p>
+
+		<p> <label id = "hNo_label" style="display: none;"> House No.</label> 
+			<input type="text" name="hNo" id="hNo" style="display: none;" /> 
+		</p>
+		<p> <label id = "street_label" style="display: none;">Street</label> 
+			<input type="text" name="street" id="street" style="display: none;" /> 
+		</p>
+		<p> <label id = "area_label" style="display: none;"> Area</label> 
+			<input type="text" name="area" id="area" style="display: none;" /> 
+		</p>
+		<p> <label id = "city_label" style="display: none;"> City</label> 
+			<input type="text" name="city" id="city" style="display: none;" /> 
+		</p>
+		<p> <label id = "state_label" style="display: none;"> State</label> 
+			<input type="text" name="state" id="state" style="display: none;" /> 
+		</p>
+		<p> 
+			<label id = "pin_label" style="display: none;"> Pincode</label> 
+			<input type="text" name="pin" id="pin" style="display: none;" />
+		</p>
+
+		<p>
+			<br>
+			<input type="submit" value="Confirm changes" class="btn btn-outline-primary" />
+		</p>
+	</form>
+{% endfor %}
+</div>
+</div>
+
+<script language = "javascript" type = "text/javascript">
+	function edit_address(){
+		// script to hide and show address details
+		// alert("Caution: Don't press confirm before entering all address fields")
+	    if (document.getElementById("hNo").style.display == "none") {
+	        document.getElementById("hNo").style.display = "block";
+	        document.getElementById("street").style.display = "block";
+	        document.getElementById("area").style.display = "block";
+	        document.getElementById("city").style.display = "block";
+	        document.getElementById("state").style.display = "block";
+	        document.getElementById("pin").style.display = "block";
+	    	
+	    	document.getElementById("hNo_label").style.display = "block";
+	        document.getElementById("street_label").style.display = "block";
+	        document.getElementById("area_label").style.display = "block";
+	        document.getElementById("city_label").style.display = "block";
+	        document.getElementById("state_label").style.display = "block";
+	        document.getElementById("pin_label").style.display = "block";
+	    } 
+	    else {
+	        document.getElementById("hNo").style.display = "none";
+	        document.getElementById("street").style.display = "none";
+	        document.getElementById("area").style.display = "none";
+	        document.getElementById("city").style.display = "none";
+	        document.getElementById("state").style.display = "none";
+	        document.getElementById("pin").style.display = "none";
+
+	    	document.getElementById("hNo_label").style.display = "none";
+	        document.getElementById("street_label").style.display = "none";
+	        document.getElementById("area_label").style.display = "none";
+	        document.getElementById("city_label").style.display = "none";
+	        document.getElementById("state_label").style.display = "none";
+	        document.getElementById("pin_label").style.display = "none";	    
+	    }
+	}
+
+	function edit_phone_no(){
+		// script to change phone number
+		if(document.getElementById("phone_no").style.display == "block"){
+			document.getElementById("phone_no").style.display = "none";
+		}
+		else{
+			document.getElementById("phone_no").style.display = "block";
+		}
+	}
+</script>
+{% endblock %}
