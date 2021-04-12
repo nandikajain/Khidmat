@@ -1,0 +1,35 @@
+{% extends "managementNavbar.html" %}
+{% block title %}
+Profile
+{% endblock %}
+{% block content %}
+<div class="card m-auto mt-5 p-2 mb-5" style="width:70%;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+
+<div class="bd-cheatsheet container-fluid bg-body">
+{% for i in x %}
+	<h2 style="color:#00b1ff"><img src="https://picsum.photos/60" style="border-radius: 30px;" class="me-3"><span>{{i[4]}}</span></h2>
+	<p style="text-transform: uppercase; font-weight: 500;font-size: 115%; color:#91612F;">{{i[3]}}</p>
+
+	<hr>
+
+	<h3 style="text-decoration: underline;">Details</h3>
+	<p class="m-0"><span style="text-decoration: underline;">Name:</span> {{i[4]}} </p>
+	<p class="m-0"><span style="text-decoration: underline;">Description:</span> {{i[3]}} </p>
+	<p class="m-0"><span style="text-decoration: underline;">Phone:</span> {{i[5]}}</p>
+	<p class="m-0"><span style="text-decoration: underline;">Restaurant type:</span> {{i[1]}} </p>
+	{% if i[11] == 1:%}
+		<p class="m-0"><span style="text-decoration: underline;">Dine in available:</span> Yes</p>
+	{% else: %}
+		<p class="m-0"><span style="text-decoration: underline;">Dine in available:</span> No</p>
+	{% endif %}
+	<p class="m-0"><span style="text-decoration: underline;">Day of Opening:</span> {{i[2]}}</p>
+	<hr>
+	<h3 style="text-decoration: underline;">Address:</h3>
+	<p class="m-0"> {{i[6]}}, {{i[7]}}</p>
+	<p class="m-0"> {{i[8]}}, {{i[9]}}</p>
+	<p class="m-0"> {{i[10]}}</p>
+
+{% endfor %}
+</div>
+</div>
+{% endblock %}
