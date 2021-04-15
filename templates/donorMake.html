@@ -1,36 +1,50 @@
-<!DOCTYPE html>
-<head>
-    <title>Khidmat</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-</head>
+{% extends "donorNavbar.html" %}
+{% block title %}
+Khidmat
+{% endblock %}
+{% block content %}
+<div class="jumbotron jumbotron-fluid" style="background-color:#eeeeee">
+	<div class="container" >
+		<div class="row m-0 p-2 pt-3">
+			<div class="col-md-6 col-12 m-auto">
+				<h1 style="color:#00b1ff">Make a Donation!!</h1>
+				<p style="font-size: 19px;">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed imperdiet facilisis ex sit amet lobortis. Mauris sed mi tortor. Sed laoreet risus et mauris pharetra, eu ultricies ex sollicitudin. Nulla
+				</p>
+			</div>
+			<div class="col-md-6 col-12 m-auto ">
+				<img src="{{url_for('static', filename='makeDonation.png')}}" width="55%" class="ms-5">
+			</div>
+		</div>
+	</div>
+  </div>
+  <div class="container pt-3 pb-3 pe-5 ps-5">
+	<h2 style="text-align: center;color:#91612F; text-decoration: underline;" class="mt-3 mb-5">Make an impact!</h2>
+	<form action='#' method="post" class="container pl-5 pr-5 m-auto">
 
-<body>
-    
-	<form action='#' method="post">
 		<p>
-			Donor ID
-		</p>
-		<p>
+			<p class="m-0" style="color:red; font-size:80%">
+				Donor ID*
+			</p>
 			<input type="text" name="donor" />
-			<br><br><br><br>
-		</p>
-		
-		<p>
-		Select Donation type
 		</p>
 		<p>
+			<p class="m-0" style="color:red; font-size:80%">
+				Donation type*
+				</p>
 			<select class="form-select" name="category">
             <option value="Meals">Meals</option>
             <option value="Clothes">Clothes</option>
             <option value="Money">Money</option>
             </select>
-            Quantity
-            <input type="text" name="quantity" />
-            <br><br><br>
 		</p>
-
-		<p><input type="submit" value="Place Order"/></p>
+		<p>
+			<p class="m-0" style="color:red; font-size:80%">Quantity*</p>
+            <input type="text" name="quantity" />
+		</p>
+		<p><input type="submit" value="Donate" class="btn btn-success btn-lg" style="border-radius: 30px;"/></p>
 	</form>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-</body>
-<html>
+  </div>
+    
+
+{% endblock %}

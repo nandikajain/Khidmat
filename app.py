@@ -414,8 +414,6 @@ def logout():
     session.pop("user", None)
     return redirect(url_for("login"))
 
-
-#todo
 @app.route("/customer/place", methods= ["POST", "GET"])
 def place():
     if "user" in session:
@@ -536,8 +534,7 @@ def place():
     else:
         return redirect(url_for("login"))
 
-# todo
-@app.route("/donor/make", methods= ["POST", "GET"])
+@app.route("/donor/makeDonation", methods= ["POST", "GET"])
 def make():
     if "user" in session:
         if request.method == "POST":
