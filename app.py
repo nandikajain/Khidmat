@@ -148,7 +148,6 @@ def management_prof():
     else:
         return redirect(url_for("login"))
     
-#todo
 @app.route("/management/profile/edit", methods= ["POST", "GET"])
 def management_prof_edit():
     if "user" in session:
@@ -226,7 +225,6 @@ def delivery_profile():
     else:
         return redirect(url_for("login"))
 
-#todo
 @app.route("/delivery/profile/edit", methods= ["POST", "GET"])
 def delivery_prof_edit():
     if "user" in session:
