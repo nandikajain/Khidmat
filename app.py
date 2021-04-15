@@ -386,6 +386,18 @@ def restaurant_prof_edit():
     else:
         return redirect(url_for("login"))
 
+@app.route("/restaurant/orders", methods= ["POST", "GET"])
+def restaurant_orders():
+    if "user" in session:
+        restaurantID = session.get("user")[0]
+        q = f"SELECT f.name, f.isVeg, c.quantity, o.dateTime, o.customerID, o.deliveryWorkerID from Orders o, Contains c, Food f WHERE o.restaurantID = '{restaurantID}' AND o.status = 'Active' AND c.orderID = o.orderID AND c.foodID = f.itemID;"
+        mycursor.execute(q)
+        myresult = mycursor.fetchall()
+        myresult.append(session.get("user")[3])
+        return render_template("restaurantOrders.html", x = myresult)
+    else:
+        return redirect(url_for("login"))
+
 @app.route("/receiver", methods= ["POST", "GET"])
 def receiver():
     if "user" in session:
