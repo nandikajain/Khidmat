@@ -154,7 +154,6 @@ def management_prof():
         return redirect(url_for("login"))
     
 #todo
-
 @app.route("/management/profile/edit", methods= ["POST", "GET"])
 def management_prof_edit():
     if "user" in session:
@@ -164,9 +163,7 @@ def management_prof_edit():
         mycursor.execute(q)
         myresult = mycursor.fetchall()
         if request.method == "POST":
-            # read data
             phone_no = request.form.get("phone_no")
-
             hNo = request.form.get("hNo")
             street = request.form.get("street")
             area = request.form.get("area")
