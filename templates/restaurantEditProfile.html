@@ -10,50 +10,69 @@ Profile
 	<form action='#' method="post">
 	<h2 style="color:#00b1ff"><img src="https://picsum.photos/60" style="border-radius: 30px;" class="me-3"><span>{{i[4]}}</span></h2>
 
-	<p style="text-transform: uppercase; font-weight: 500;font-size: 115%; color:#91612F;">{{i[3]}}</p>
+	<p style="font-weight: 500;font-size: 115%; color:#91612F;">{{i[3]}}</p>
 
 	<hr>
 
 	<h3 style="text-decoration: underline;">Details</h3>
-	<p class="m-0">
+	<p class="m-0 pb-1">
 		<span style="text-decoration: underline;">Name:</span> {{i[4]}}
-		<button type="button" onclick="edit_name();" class="btn btn-outline-primary">EDIT</button>
+		<button type="button" onclick="edit_name();" class="btn btn-warning btn-sm">
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
+				<path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
+			  </svg>
+			EDIT</button>
 		<input type="text" name="restaurant_name" id="restaurant_name" style="display: none;" />
 	</p>
-	<p class="m-0">
+	<p class="m-0 pb-1">
 		<span style="text-decoration: underline;">Description:</span> {{i[3]}} 
-		<button type="button" onclick="edit_description();" class="btn btn-outline-primary">EDIT</button>
+		<button type="button" onclick="edit_description();" class="btn btn-warning btn-sm">
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
+				<path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
+			  </svg>EDIT</button>
 		<input type="text" name="description" id="description" style="display: none;" />
 	</p>
-	<p class="m-0">		
+	<p class="m-0 pb-1">		
 		<span style="text-decoration: underline;">Phone:</span> {{i[5]}}
-		<button type="button" onclick="edit_phone_no();" class="btn btn-outline-primary">EDIT</button>
+		<button type="button" onclick="edit_phone_no();" class="btn btn-warning btn-sm">
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
+				<path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
+			  </svg>EDIT</button>
 		<input type="text" name="phone_no" id="phone_no" style="display: none;" />
 	</p>
-	<p class="m-0"><span style="text-decoration: underline;">Restaurant type:</span> {{i[1]}} </p>		
+	<p class="m-0 pb-1"><span style="text-decoration: underline;">Restaurant type:</span> {{i[1]}} </p>		
 
 	{% if i[11] == 1: %}
-		<p class="m-0"><span style="text-decoration: underline;">Dine in available:</span> Yes
-			<button type="button" onclick="edit_dinein1();" class="btn btn-outline-primary">EDIT</button>
+		<p class="m-0 pb-1"><span style="text-decoration: underline;">Dine in available:</span> Yes
+			<button type="button" onclick="edit_dinein1();" class="btn btn-warning btn-sm">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
+					<path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
+				  </svg>EDIT</button>
 			<input type="text" name="dinein1" id="dinein1" style="display: none;" />
 		</p>
 	{% else: %}
-		<p class="m-0"><span style="text-decoration: underline;">Dine in available:</span> No
-			<button type="button" onclick="edit_dinein2();" class="btn btn-outline-primary">EDIT</button>
+		<p class="m-0 pb-1"><span style="text-decoration: underline;">Dine in available:</span> No
+			<button type="button" onclick="edit_dinein2();" class="btn btn-warning btn-sm">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
+					<path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
+				  </svg>EDIT</button>
 			<input type="text" name="dinein2" id="dinein2" style="display: none;" />
 		</p>
 	{% endif %}
-	<p class="m-0"><span style="text-decoration: underline;">Day of Opening:</span> {{i[2]}}</p>
+	<p class="m-0 pb-1"><span style="text-decoration: underline;">Day of Opening:</span> {{i[2]}}</p>
 
 	<hr>
 
 
 	<h3 style="text-decoration: underline;">Address:</h3>
-	<p class="m-0"> {{i[6]}}, {{i[7]}}</p>
-	<p class="m-0"> {{i[8]}}, {{i[9]}}</p>
+	<p class="m-0 pb-1"> {{i[6]}}, {{i[7]}}</p>
+	<p class="m-0 pb-1"> {{i[8]}}, {{i[9]}}</p>
 	<p 
-		class="m-0"> {{i[10]}}
-		<button type="button" onclick= "edit_address();" class="btn btn-outline-primary">EDIT</button>
+		class="m-0 pb-1"> {{i[10]}}
+		<button type="button" onclick= "edit_address();" class="btn btn-warning btn-sm">
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
+				<path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
+			  </svg>EDIT</button>
 	</p>
 
 		<p> <label id = "street_label" style="display: none;">Street</label> 
@@ -75,7 +94,7 @@ Profile
 
 		<p>
 			<br>
-			<input type="submit" value="Confirm changes" class="btn btn-outline-primary" />
+			<input type="submit" value="Confirm changes" class="btn btn-primary btn-lg" style="border-radius:30px"/>
 		</p>
 	</form>
 {% endfor %}

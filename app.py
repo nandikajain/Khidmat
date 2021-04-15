@@ -10,8 +10,6 @@ app.permanent_session_lifetime = timedelta(days = 1)
 app.secret_key = "khidmatDB"
 mycursor = mydb.cursor()
 
-
-
 @app.route("/", methods= ["POST", "GET"])
 def login():
     if(request.method == "GET"):
@@ -110,7 +108,6 @@ def customer():
     else:
         return redirect(url_for("login"))
     
-
 @app.route("/customer/profile")
 def custprof():
     if "user" in session:
@@ -121,7 +118,6 @@ def custprof():
         return render_template("customerProfile.html", x = myresult)
     else:
         return redirect(url_for("login"))
-
 
 @app.route("/customer/orders")
 def pastorders():
@@ -140,7 +136,6 @@ def management():
         return render_template("management.html")
     else:
         return redirect(url_for("login"))
-
 
 @app.route("/management/profile")
 def management_prof():
@@ -163,7 +158,9 @@ def management_prof_edit():
         mycursor.execute(q)
         myresult = mycursor.fetchall()
         if request.method == "POST":
+            # read data
             phone_no = request.form.get("phone_no")
+
             hNo = request.form.get("hNo")
             street = request.form.get("street")
             area = request.form.get("area")
@@ -237,7 +234,6 @@ def delivery_prof_edit():
         q = f"SELECT * FROM DeliveryWorker WHERE employeeID = '{user}'"
         mycursor.execute(q)
         myresult = mycursor.fetchall()
-
         if request.method == "POST":
             phone = myresult[0][3]
             tip = myresult[0][13]
@@ -247,12 +243,10 @@ def delivery_prof_edit():
             area = myresult[0][9]
             state = myresult[0][10]
             pin = myresult[0][11]
-
             if(request.form.get("phone_no") != ""):
                 phone = request.form.get("phone_no")
             if(request.form.get("tip") != ""):
                 tip = request.form.get("tip")
-
             if(request.form.get("hNo") != ""):
                 hNo = request.form.get("hNo")
             if(request.form.get("street") != ""):
@@ -324,20 +318,6 @@ def restaurant():
     else:
         return redirect(url_for("login"))
 
-@app.route("/restaurant/orders", methods= ["POST", "GET"])
-def restaurant_orders():
-    if "user" in session:
-        restaurantID = session.get("user")[0]
-        q = f"SELECT f.name, f.isVeg, c.quantity, o.dateTime, o.customerID, o.deliveryWorkerID from Orders o, Contains c, Food f WHERE o.restaurantID = '{restaurantID}' AND o.status = 'Active' AND c.orderID = o.orderID AND c.foodID = f.itemID;"
-        mycursor.execute(q)
-        myresult = mycursor.fetchall()
-        myresult.append(session.get("user")[3])
-        return render_template("restaurantOrders.html", x = myresult)
-    else:
-        return redirect(url_for("login"))
-
-
-#todo
 @app.route("/restaurant/profile")
 def restaurant_prof():
     if "user" in session:
@@ -349,7 +329,6 @@ def restaurant_prof():
     else:
         return redirect(url_for("login"))
 
-#todo
 @app.route("/restaurant/profile/edit", methods= ["POST", "GET"])
 def restaurant_prof_edit():
     if "user" in session:
@@ -358,7 +337,6 @@ def restaurant_prof_edit():
         mycursor.execute(q)
         myresult = mycursor.fetchall()
         if request.method == "POST":
-            # read data
             phone = myresult[0][5]
             name = myresult[0][4]
             description = myresult[0][3]
@@ -393,7 +371,6 @@ def restaurant_prof_edit():
                 state = request.form.get("state")
             if(request.form.get("pin") != ""):
                 pin = request.form.get("pin")
-
             if(str.lower(dinein) == "yes"):
                 q = f"UPDATE Restaurant SET isDineIn = 1, phone = '{phone}', description = '{description}', name = '{name}', street = '{street}', area = '{area}', city = '{city}', state = '{state}', pin = '{pin}' WHERE restaurantID = '{user}';"
             else:
@@ -450,7 +427,6 @@ def place():
             food1 = request.form.get("food1")
             food2 = request.form.get("food2")
             food3 = request.form.get("food3")
-
             quantity1 = request.form.get("quantity1")
             quantity2 = request.form.get("quantity2")
             quantity3 = request.form.get("quantity3")
@@ -464,19 +440,14 @@ def place():
             if (food3 != "" and quantity3 == ""):
                 print("quantity3  empty")
                 return redirect(url_for("place"))
-
-            # check if form details are correct
             flag = False
             q=f"SELECT * FROM Customer WHERE phone='{user}';"
-            print(q)
             mycursor.execute(q)
             res = mycursor.fetchall()
-            # print(res)
             if(len(res) != 1):
                 flag = True
 
             q=f"SELECT itemID FROM Food;"
-            print(q)
             mycursor.execute(q)
             res = mycursor.fetchall()
             if (food1 != "" and (food1,) not in res):
@@ -485,12 +456,10 @@ def place():
                 flag = True
             if (food3 != "" and (food3,) not in res):
                 flag = True
-
             if(flag):
                 print("Invalid details")
                 return  redirect(url_for("place"))
 
-            # find the next order number
             q=f"SELECT orderID FROM Orders;"
             mycursor.execute(q)
             res = mycursor.fetchall()
@@ -500,7 +469,6 @@ def place():
                     mx = int(i[0][1:])
 
             next_order = 'O'+str(mx+1)
-            #check if all food are from same restaurant, else give error
             q=f"SELECT itemID, restaurantID, price FROM Food;"
             mycursor.execute(q)
             res = mycursor.fetchall()
@@ -519,7 +487,6 @@ def place():
                 if (food3 != "" and food3 in i):
                     restaurant_name3 = i[1]
                     bill_amount += i[2] * int(quantity3)
-
             if(food1 != "" and food2 != "" and food1 == food2):
                 return redirect(url_for("place"))
             if(food2 != "" and food3 != "" and food2 == food3):
@@ -537,16 +504,11 @@ def place():
                 return redirect(url_for("place"))
             dt = datetime.now()
             dt = dt.strftime("%Y-%m-%d %H-%M-%S")
-
             discount_value = str(randint(1,30))
-
-            # generate all relevant data related to the order
             q=f"INSERT INTO Orders(orderID, status, dateTime, billAmt, paymentMode, customerID, restaurantID, deliveryWorkerID, discount, tip) VALUES('{next_order}', 'Active', '{dt}', {str(bill_amount)}, '{payment_mode}', '{user}', '{restaurant_name1}', 'E250{800+2*randint(0,49)}', {discount_value}, 0);"
-            print(q)
             mycursor.execute(q)
             myresult = mycursor.fetchall()
             mydb.commit()
-            print(myresult)
 
             if(food1 != ""):
                 q=f"INSERT INTO Contains(foodID, orderID, quantity) VALUES('{food1}', '{next_order}', {quantity1});"
@@ -582,7 +544,6 @@ def make():
     if "user" in session:
         if request.method == "POST":
             donorID = session.get("user")[0]
-            
             category = request.form.get("category")
             quantity = request.form.get("quantity")
             
@@ -594,34 +555,25 @@ def make():
                 return redirect(url_for("make"))
 
             q = f"SELECT donationID FROM Donation;"
-            # print(q)
             mycursor.execute(q)
             res = mycursor.fetchall()
-            # print(res)
             mx = 0
             for i in res:
                 if(int(i[0][2:]) > mx):
                     mx = int(i[0][2:])
 
             donationID = "DO"+str(mx+1)
-
             dt = datetime.now()
             dt = dt.strftime("%Y-%m-%d %H-%M-%S")
-
             q = f"INSERT INTO Donation(donationID, donorID, receiverID, deliveryWorkerID, dateTime, category, status, quantity) VALUES('{donationID}', '{donorID}', NULL, 'E250{800+2*randint(0,49)}', '{dt}', '{category}', 'active', {quantity});"
-            print(q)
             mycursor.execute(q)
             myresult = mycursor.fetchall()
             mydb.commit()
-            print(myresult)
-
             q = f"SELECT points FROM Donor WHERE donorID = '{donorID}';"
-            print(q)
             mycursor.execute(q)
             res = mycursor.fetchall()
             new_points = str((int(res[0][0]))+randint(10,50))
             q = f"UPDATE Donor SET points = {new_points} WHERE donorID = '{donorID}';"
-            print(q)
             mycursor.execute(q)
             res = mycursor.fetchall()
             mydb.commit()
