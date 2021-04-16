@@ -346,13 +346,13 @@ def restaurant_prof_edit():
             street = myresult[0][6]
             city = myresult[0][7]
             area = myresult[0][8]
-            state = myresult[0][9]
-            pin = myresult[0][10]
+            state = myresult[0][8]
+            pin = myresult[0][9]
 
             if(request.form.get("phone_no") != ""):
                 phone_no = request.form.get("phone_no")
             if(request.form.get("restaurant_name") != ""):
-                name = request.form.get("phone_no")
+                name = request.form.get("restaurant_name")
             if(request.form.get("description") != ""):
                 description = request.form.get("description")
             if(request.form.get("dinein1") != None):
