@@ -126,6 +126,7 @@ def pastorders():
         mycursor = mydb.cursor()
         mycursor.execute(f"Select o.orderID, o.customerID, o.restaurantID, o.billAmt, o.tip, o.status, o.dateTime, o.paymentMode, r.name from Orders o, Restaurant r where o.restaurantID = r.restaurantID and customerID = '{user}'")
         myresult = mycursor.fetchall()
+
         return render_template("customerOrders.html", x = myresult)
     else:
         return redirect(url_for("login"))
@@ -133,7 +134,13 @@ def pastorders():
 @app.route("/management", methods= ["POST", "GET"])
 def management():
     if "user" in session:
-        return render_template("management.html")
+        user = session["user"][0]
+        mycursor = mydb.cursor()
+        mycursor.execute(f"SELECT  Receiver.accepts, COUNT(Receiver.accepts) FROM Receiver GROUP BY  Receiver.accepts WITH ROLLUP;")
+        myresult = mycursor.fetchall()
+        mycursor.execute(f"SELECT TIMESTAMPDIFF( YEAR, dob,  CURDATE()) AS Age,   COUNT(TIMESTAMPDIFF( YEAR, dob,  CURDATE())) FROM Customer  GROUP BY  Age WITH ROLLUP;")
+        myresult2 = mycursor.fetchall()
+        return render_template("management.html", x = myresult, y= myresult2)
     else:
         return redirect(url_for("login"))
 

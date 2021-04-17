@@ -22,5 +22,39 @@ Khidmat
 	</div>
   </div>
 <br>
+<h2 style="text-align: center;color:#91612F; text-decoration: underline;" class="mt-3 mb-5">View Analysis</h2>
+<div id="chartContainer" style="height: 350px; width: 100%;" class="mb-5"></div>
+
+
+
+<script type="text/javascript">
+	window.onload = function () {
+		var chart = new CanvasJS.Chart("chartContainer",
+		{
+			title:{
+				text: "Analysis of Receivers by type of Accepts"
+			},
+			legend: {
+				maxWidth: 350,
+				itemWidth: 120
+			},
+			data: [
+			{
+				type: "pie",
+				showInLegend: true,
+				legendText: "{indexLabel}",
+				dataPoints: [
+					{ y: '{{x[0][1]}}', indexLabel: '{{x[0][0]}}' },
+					{ y: '{{x[1][1]}}', indexLabel: '{{x[1][0]}}' },
+					{ y:'{{x[2][1]}}', indexLabel: '{{x[2][0]}}' },
+				
+				]
+			}
+			]
+		});
+		chart.render();
+	}
+	</script>
+	<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 {% endblock %}
