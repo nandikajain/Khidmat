@@ -23,16 +23,20 @@ Khidmat
   </div>
 <br>
 <h2 style="text-align: center;color:#91612F; text-decoration: underline;" class="mt-3 mb-5">View Analysis</h2>
-<div id="chartContainer" style="height: 350px; width: 100%;" class="mb-5"></div>
+<div class="container">
+	<div id="chartContainer1" style="height: 350px; width: 100%;" class="mb-5 pb-5"></div>
+<hr>
+	<div id="chartContainer" style="height: 350px; width: 100%;" class="mb-5"></div>
+</div>
 
-
+{{y}}
 
 <script type="text/javascript">
 	window.onload = function () {
 		var chart = new CanvasJS.Chart("chartContainer",
 		{
 			title:{
-				text: "Analysis of Receivers by type of Accepts"
+				text: "Analysis of No. of Receivers by type of Accepts"
 			},
 			legend: {
 				maxWidth: 350,
@@ -52,7 +56,70 @@ Khidmat
 			}
 			]
 		});
-		chart.render();
+	chart.render();
+	// var chart = new CanvasJS.Chart("chartContainer1",
+	// 	{
+	// 		title:{
+	// 			text: "Analysis of Customers by their age group"
+	// 		},
+	// 		legend: {
+	// 			maxWidth: 350,
+	// 			itemWidth: 120
+	// 		},
+	// 		data: [
+	// 		{
+	// 			type: "pie",
+	// 			showInLegend: true,
+	// 			legendText: "{indexLabel}",
+	// 			dataPoints: [
+	// 				{ y: '{{y1[0][1]}}', indexLabel: 'Age ' +  '{{y1[0][0]}}' },
+	// 				{ y: '{{y1[1][1]}}', indexLabel: 'Age ' +  '{{y1[1][0]}}' },
+	// 				{ y: '{{y1[2][1]}}', indexLabel: 'Age ' +  '{{y1[2][0]}}' },
+	// 				{ y: '{{y1[3][1]}}', indexLabel: 'Age ' +  '{{y1[3][0]}}' },
+	// 				{ y: '{{y1[4][1]}}', indexLabel: 'Age ' +  '{{y1[4][0]}}' },
+	// 				{ y: '{{y1[5][1]}}', indexLabel: 'Age ' +  '{{y1[5][0]}}' },
+	// 				{ y: '{{y1[6][1]}}', indexLabel: 'Age ' +  '{{y1[6][0]}}' },
+	// 				{ y: '{{y1[7][1]}}', indexLabel: 'Age ' +  '{{y1[7][0]}}' },
+	// 				{ y: '{{y1[8][1]}}', indexLabel: 'Age ' +  '{{y1[8][0]}}' },
+	// 				{ y: '{{y1[9][1]}}', indexLabel: 'Age ' +  '{{y1[9][0]}}' },
+	// 				{ y: '{{y1[10][1]}}', indexLabel: 'Age ' +  '{{y1[10][0]}}' },
+	// 				{ y: '{{y1[11][1]}}', indexLabel: 'Age ' +  '{{y1[11][0]}}' },
+	// 				{ y: '{{y1[12][1]}}', indexLabel: 'Age ' +  '{{y1[12][0]}}' },
+	// 				{ y: '{{y1[13][1]}}', indexLabel: 'Age ' +  '{{y1[13][0]}}' },
+	// 			]
+	// 		}
+	// 		]
+	// 	});
+	var chart = new CanvasJS.Chart("chartContainer1",
+    {
+      title:{
+        text: "Analysis of No. of Customers by their age group"
+      },
+      data: [
+
+      {
+        dataPoints: [
+        { x: 1, y: {{y1[0][1]}}, label: "Age {{y1[0][0]}}"},
+        { x: 2, y: {{y1[1][1]}}, label: "Age {{y1[1][0]}}"},
+        { x: 3, y: {{y1[2][1]}}, label: "Age {{y1[2][0]}}"},
+        { x: 4, y: {{y1[3][1]}}, label: "Age {{y1[3][0]}}"},
+        { x: 5, y: {{y1[4][1]}}, label: "Age {{y1[4][0]}}"},
+        { x: 6, y: {{y1[5][1]}}, label: "Age {{y1[5][0]}}"},
+        { x: 7, y: {{y1[6][1]}}, label: "Age {{y1[6][0]}}"},
+        { x: 8, y: {{y1[7][1]}}, label: "Age {{y1[7][0]}}"},
+        { x: 9, y: {{y1[8][1]}}, label: "Age {{y1[8][0]}}"},
+		{ x: 10, y: {{y1[9][1]}}, label: "Age {{y1[9][0]}}"},
+        { x: 11, y: {{y1[10][1]}}, label: "Age {{y1[10][0]}}"},
+        { x: 12, y: {{y1[11][1]}}, label: "Age {{y1[11][0]}}"},
+		{ x: 13, y: {{y1[12][1]}}, label: "Age {{y1[12][0]}}"},
+        { x: 14, y: {{y1[13][1]}}, label: "Age {{y1[13][0]}}"},
+        ]
+      }
+      ]
+    });
+
+	chart.render();
+
 	}
 	</script>
 	<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>

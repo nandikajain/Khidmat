@@ -140,7 +140,9 @@ def management():
         myresult = mycursor.fetchall()
         mycursor.execute(f"SELECT TIMESTAMPDIFF( YEAR, dob,  CURDATE()) AS Age,   COUNT(TIMESTAMPDIFF( YEAR, dob,  CURDATE())) FROM Customer  GROUP BY  Age WITH ROLLUP;")
         myresult2 = mycursor.fetchall()
-        return render_template("management.html", x = myresult, y= myresult2)
+        # for i in myresult2:
+        #     print(type(i[0]), type(i[1]))
+        return render_template("management.html", x = myresult, y1= myresult2)
     else:
         return redirect(url_for("login"))
 
