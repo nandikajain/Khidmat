@@ -140,9 +140,13 @@ def management():
         myresult = mycursor.fetchall()
         mycursor.execute(f"SELECT TIMESTAMPDIFF( YEAR, dob,  CURDATE()) AS Age,   COUNT(TIMESTAMPDIFF( YEAR, dob,  CURDATE())) FROM Customer  GROUP BY  Age WITH ROLLUP;")
         myresult2 = mycursor.fetchall()
-        # for i in myresult2:
-        #     print(type(i[0]), type(i[1]))
-        return render_template("management.html", x = myresult, y1= myresult2)
+        mycursor.execute("select count(*) as Premium_Customers from Customer where customerType = 'premium';")
+        myresult3 = mycursor.fetchall()
+        mycursor.execute("select count(*) as Normal_Customers from Customer where customerType = 'normal';")
+        myresult4 = mycursor.fetchall()
+        print(myresult3, myresult4)
+        
+        return render_template("management.html", x = myresult, y1= myresult2, a = myresult3, b = myresult4)
     else:
         return redirect(url_for("login"))
 
@@ -219,7 +223,9 @@ def delivery():
         myresult = mycursor.fetchall()
         mycursor.execute(f"Select d.donationID, do.phone, do.hNo, do.area, do.city, do.state, do.pin, r.name, r.street, r.area, r.city, r.state, r.pin from Donation d, Donor do, Receiver r where r.receiverID = d.receiverID and d.donorID = do.donorID and d.deliveryWorkerID = '{user}'")
         myresult2 = mycursor.fetchall()
-        return render_template("delivery.html", x = myresult, y = myresult2)
+        mycursor.execute(f"SELECT  fName FROM  DeliveryWorker where employeeID='{user}';")
+        myresult3 = mycursor.fetchall()
+        return render_template("delivery.html", x = myresult, y = myresult2, z = myresult3)
     else:
         return redirect(url_for("login"))
     
@@ -284,10 +290,13 @@ def delivery_prof_edit():
 @app.route("/donor", methods= ["POST", "GET"])
 def donor():
     if "user" in session:
+        donorID = session["user"][0]
         mycursor = mydb.cursor()
         mycursor.execute("Select * from Receiver;")
         myresult = mycursor.fetchall()
-        return render_template("donor.html", x= myresult)
+        mycursor.execute(f"SELECT name from Donor where donorID = '{donorID}';")
+        myresult2 = mycursor.fetchall()
+        return render_template("donor.html", x= myresult, y = myresult2)
     else:
         return redirect(url_for("login"))
 
@@ -309,7 +318,9 @@ def donor_donations():
         mycursor = mydb.cursor()
         mycursor.execute(f"Select d.donationID, d.deliveryWorkerID, d.dateTime, d.category, d.status, d.quantity, r.name from Receiver r, Donation d where d.receiverID = r.receiverID and donorID = '{user}'")
         myresult = mycursor.fetchall()
-        return render_template("donorDonations.html", x = myresult)
+        mycursor.execute(f"SELECT name from Donor where donorID = '{user}';")
+        myresult2 = mycursor.fetchall()
+        return render_template("donorDonations.html", x = myresult, y= myresult2)
     else:
         return redirect(url_for("login"))
 
@@ -320,8 +331,10 @@ def restaurant():
         q = f"SELECT name, price, discount, category, isVeg FROM Food WHERE restaurantID = '{restaurantID}';"
         mycursor.execute(q)
         myresult = mycursor.fetchall()
+        mycursor.execute(f"SELECT name from Restaurant WHERE restaurantID='{restaurantID}';")
+        myresult2 = mycursor.fetchall()
         myresult.append(session.get("user")[3])
-        return render_template("restaurant.html", x = myresult)
+        return render_template("restaurant.html", x = myresult, y = myresult2)
     else:
         return redirect(url_for("login"))
 
@@ -403,7 +416,9 @@ def restaurant_orders():
         mycursor.execute(q)
         myresult = mycursor.fetchall()
         myresult.append(session.get("user")[3])
-        return render_template("restaurantOrders.html", x = myresult)
+        mycursor.execute(f"SELECT name from Restaurant WHERE restaurantID='{restaurantID}';")
+        myresult2 = mycursor.fetchall()
+        return render_template("restaurantOrders.html", x = myresult, y = myresult2)
     else:
         return redirect(url_for("login"))
 
@@ -414,7 +429,9 @@ def receiver():
         mycursor = mydb.cursor()
         mycursor.execute(f"Select d.donationID, d.deliveryWorkerID, d.dateTime, d.category, d.status, d.quantity, r.name from Donor r, Donation d where d.donorID = r.donorID and receiverID = '{user}'")
         myresult = mycursor.fetchall()
-        return render_template("receiver.html", x= myresult)
+        mycursor.execute(f"SELECT name from Receiver where receiverID='{user}';")
+        myresult2 = mycursor.fetchall()
+        return render_template("receiver.html", x= myresult, y = myresult2)
     else:
         return redirect(url_for("login"))
 
