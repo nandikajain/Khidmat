@@ -104,6 +104,7 @@ def customer():
         mycursor = mydb.cursor()
         mycursor.execute("Select r.name, r.description, r.city, r.type, a.av from Restaurant r, (Select restaurantID, avg(ratings) as av from Rates group by restaurantID)a where a.restaurantID = r.restaurantID;")
         myresult = mycursor.fetchall()
+
         return render_template("customer.html", x = myresult)
     else:
         return redirect(url_for("login"))
@@ -304,7 +305,6 @@ def donor():
 def donor_prof():
     if "user" in session:
         user = session["user"][0]
-        mycursor = mydb.cursor()
         mycursor.execute(f"Select * from Donor where donorID = '{user}'")
         myresult = mycursor.fetchall()
         return render_template("donorProfile.html", x = myresult)
@@ -315,12 +315,13 @@ def donor_prof():
 def donor_donations():
     if "user" in session:
         user = session["user"][0]
-        mycursor = mydb.cursor()
-        mycursor.execute(f"Select d.donationID, d.deliveryWorkerID, d.dateTime, d.category, d.status, d.quantity, r.name from Receiver r, Donation d where d.receiverID = r.receiverID and donorID = '{user}'")
+        mycursor.execute(f"SELECT d.donationID, d.deliveryWorkerID, d.dateTime, d.category, d.status, d.quantity, r.name FROM Receiver r, Donation d WHERE  d.receiverID = r.receiverID AND donorID = '{user}'")
         myresult = mycursor.fetchall()
         mycursor.execute(f"SELECT name from Donor where donorID = '{user}';")
         myresult2 = mycursor.fetchall()
-        return render_template("donorDonations.html", x = myresult, y= myresult2)
+        mycursor.execute(f"SELECT d.donationID, d.deliveryWorkerID, d.dateTime, d.category, d.status, d.quantity FROM Donation d WHERE d.receiverID IS NULL AND donorID = '{user}';")
+        myresult3 = mycursor.fetchall()
+        return render_template("donorDonations.html", x = myresult, y= myresult2, z= myresult3)
     else:
         return redirect(url_for("login"))
 
@@ -465,6 +466,8 @@ def place():
             quantity2 = request.form.get("quantity2")
             quantity3 = request.form.get("quantity3")
 
+            rating = request.form.get("rating")
+
             if (food1 != "" and quantity1 == ""):
                 print("quantity1 empty")
                 return redirect(url_for("place"))
@@ -540,6 +543,12 @@ def place():
             dt = dt.strftime("%Y-%m-%d %H-%M-%S")
             discount_value = str(randint(1,30))
             q=f"INSERT INTO Orders(orderID, status, dateTime, billAmt, paymentMode, customerID, restaurantID, deliveryWorkerID, discount, tip) VALUES('{next_order}', 'Active', '{dt}', {str(bill_amount)}, '{payment_mode}', '{user}', '{restaurant_name1}', 'E250{800+2*randint(0,49)}', {discount_value}, 0);"
+            mycursor.execute(q)
+            myresult = mycursor.fetchall()
+            mydb.commit()
+
+            q = f"INSERT INTO Rates(ratings, customerID, restaurantID) VALUES({rating}, '{user}', '{restaurant_name1}')"
+            print(q)
             mycursor.execute(q)
             myresult = mycursor.fetchall()
             mydb.commit()
