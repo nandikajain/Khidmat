@@ -40,19 +40,15 @@ In order to load the database on your system:
     <img src="static/poster1.png" width="95%">
 </p>
 
-<br>
 
 <p align ="center">
     <img src="static/poster2.png" width="95%">
 </p>
 
-<br>
 
 <p align ="center">
     <img src="static/poster3.png" width="95%">
 </p>
-
-<br>
 
 *Contact us:*
 
