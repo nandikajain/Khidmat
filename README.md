@@ -11,11 +11,12 @@
     <img src="static/loginScreen.png" width="95%">
 </p>
 
-📹 ***Check this out: [Link to demo]()***
 ## About the Project 🚀
 Khidmat is a food delivery app that connects customers with multiple restaurants and displays their menus, user-ratings and provides a vast number of food delivery options. The database centralizes the operations of Khidmat and provides a smooth user interface wherein donors can easily donate items without any hassle, and the users can select and order from the best restaurants with unbiased ratings from other customers who have ordered before.
 
 Through this project, we aim to reduce food wastage and help the organizations which work for the welfare of people get easier access to resources and create a platform that incentivizes and makes it easy to donate.
+
+Made as a part of project in Database Management System course at IIIT-Delhi.
 
 ## Setup 🤓
 
